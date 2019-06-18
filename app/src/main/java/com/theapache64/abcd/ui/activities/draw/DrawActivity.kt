@@ -29,6 +29,7 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
         }
     }
 
+    private lateinit var binding: ActivityDrawBinding
     @Inject
     lateinit var factory: ViewModelProvider.Factory
     private lateinit var viewModel: DrawViewModel
@@ -37,7 +38,7 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-        val binding = bindContentView<ActivityDrawBinding>(R.layout.activity_draw)
+        this.binding = bindContentView(R.layout.activity_draw)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -56,12 +57,31 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+
+            // Choose brush here
             R.id.action_choose_brush -> {
                 showBrushesFragment()
                 return true
             }
+
+            // Choose brush size
+            R.id.action_change_brush_size -> {
+                showBrushChooser()
+                return true
+            }
+
+            // Undo canvas
+            R.id.action_undo -> {
+                binding.iContentDraw.spadeCanvas.undo()
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showBrushChooser() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun showBrushesFragment() {

@@ -46,7 +46,8 @@ class BrushesFragment private constructor() : DialogFragment(), BrushesHandler {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    lateinit var callback: Callback
+    // To get callback from BrushesFragment
+    private lateinit var callback: Callback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -102,7 +103,7 @@ class BrushesFragment private constructor() : DialogFragment(), BrushesHandler {
         dismiss()
     }
 
-    public interface Callback {
+    interface Callback {
         fun onBrushSelected(brush: Brush)
     }
 

@@ -4,6 +4,11 @@
     tools:context="com.theapache64.abcd.MainActivity">
 
     <!--Undo -->
+    <item
+        android:id="@+id/action_undo"
+        android:icon="@drawable/ic_undo_white"
+        android:title="@string/action_undo"
+        app:showAsAction="ifRoom" />
 
     <!--Brush-->
     <item
