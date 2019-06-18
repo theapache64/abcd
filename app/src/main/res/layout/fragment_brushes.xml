@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress AndroidUnknownAttribute -->
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.theapache64.abcd.ui.fragments.BrushesViewModel" />
+
+        <variable
+            name="handler"
+            type="com.theapache64.abcd.ui.fragments.BrushesHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.fragments.BrushesFragment">
+
+        <!--Title-->
+        <TextView
+            android:id="@+id/tv_title"
+            fontPath="fonts/GoogleSans-Medium.ttf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="@string/dialog_title_choose_brush"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--Brushes-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_brushes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/b_dismiss"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_brush" />
+
+        <!--Dismiss-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/b_dismiss"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="@{()-> handler.onDismissClicked()}"
+            android:text="@string/action_dismiss"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/rv_brushes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

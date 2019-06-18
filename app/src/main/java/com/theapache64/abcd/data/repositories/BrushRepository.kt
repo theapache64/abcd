@@ -7,7 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class BrushRepository @Inject constructor() {
 
-    private val brushes = listOf(
+    val brushes = listOf(
         Brush("Sky", "#9ceedd"),
         Brush("Tree", "#a8c832"),
         Brush("Cloud", "#696969"),

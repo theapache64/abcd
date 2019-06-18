@@ -22,7 +22,7 @@ import java.util.*
 /**
  * This class defines fields and methods for drawing.
  */
-class CanvasView : View {
+class SpadeCanvas : View {
 
     private var canvas: Canvas? = null
     private var bitmap: Bitmap? = null

@@ -11,12 +11,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
+import com.theapache64.abcd.models.Brush
+import com.theapache64.abcd.ui.fragments.BrushesFragment
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class DrawActivity : BaseAppCompatActivity() {
+class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
+
+    companion object {
+        const val ID = R.id.MAIN_ACTIVITY_ID
+
+        fun getStartIntent(context: Context): Intent {
+            val intent = Intent(context, DrawActivity::class.java)
+            return intent
+        }
+    }
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -33,6 +44,8 @@ class DrawActivity : BaseAppCompatActivity() {
         this.viewModel = ViewModelProviders.of(this, factory).get(DrawViewModel::class.java)
         binding.viewModel = viewModel
 
+        showBrushesFragment()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -43,17 +56,21 @@ class DrawActivity : BaseAppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_choose_brush -> true
+            R.id.action_choose_brush -> {
+                showBrushesFragment()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    companion object {
-        const val ID = R.id.MAIN_ACTIVITY_ID
-
-        fun getStartIntent(context: Context): Intent {
-            val intent = Intent(context, DrawActivity::class.java)
-            return intent
-        }
+    private fun showBrushesFragment() {
+        val brushesFragment = BrushesFragment.newInstance()
+        brushesFragment.show(supportFragmentManager, BrushesFragment.TAG)
     }
+
+    override fun onBrushSelected(brush: Brush) {
+        supportActionBar!!.subtitle = "Brush : ${brush.name}"
+    }
+
 }
