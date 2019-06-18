@@ -2,9 +2,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.theapache64.abcd.MainActivity">
+
+
+    <!--Brush-->
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_choose_brush"
+        android:icon="@drawable/ic_brush_style_white"
+        android:title="@string/action_brushes"
+        app:showAsAction="ifRoom" />
+
+
+    <!--Brush Size-->
+    <item
+        android:id="@+id/action_change_brush_size"
+        android:icon="@drawable/ic_brush_size_white"
+        android:title="@string/action_change_brush_size"
+        app:showAsAction="always" />
+
 </menu>

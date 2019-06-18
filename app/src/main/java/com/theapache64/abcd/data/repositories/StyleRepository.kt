@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class StylesRepository @Inject constructor(
+class StyleRepository @Inject constructor(
     server: Server
 ) {
     private val styles = listOf(

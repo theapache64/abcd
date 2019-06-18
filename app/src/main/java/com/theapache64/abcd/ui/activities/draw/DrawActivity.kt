@@ -9,8 +9,6 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -35,12 +33,6 @@ class DrawActivity : BaseAppCompatActivity() {
         this.viewModel = ViewModelProviders.of(this, factory).get(DrawViewModel::class.java)
         binding.viewModel = viewModel
 
-
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,11 +42,8 @@ class DrawActivity : BaseAppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_choose_brush -> true
             else -> super.onOptionsItemSelected(item)
         }
     }
