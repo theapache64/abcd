@@ -10,9 +10,9 @@ import dagger.android.support.AndroidSupportInjectionModule
     includes = [
         AndroidSupportInjectionModule::class,
         NetworkModule::class,
-
         ViewModelModule::class,
-        ActivitiesBuilderModule::class
+        ActivitiesBuilderModule::class,
+        ServerModule::class
     ]
 )
 class AppModule(private val application: Application) {

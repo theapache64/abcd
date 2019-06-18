@@ -1,18 +1,15 @@
 package com.theapache64.abcd
 
+
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import com.theapache64.twinkill.TwinKill
-
-import com.theapache64.twinkill.googlefonts.GoogleFonts
-
-import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
-import com.theapache64.twinkill.network.utils.retrofit.interceptors.AuthorizationInterceptor
-import com.theapache64.twinkill.network.utils.retrofit.interceptors.CurlInterceptor
-
-
+import com.theapache64.abcd.data.repositories.ServerRepository
 import com.theapache64.abcd.di.components.DaggerAppComponent
+import com.theapache64.abcd.models.Server
+import com.theapache64.twinkill.TwinKill
+import com.theapache64.twinkill.googlefonts.GoogleFonts
+import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
+import com.theapache64.twinkill.network.utils.retrofit.interceptors.CurlInterceptor
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -23,6 +20,9 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
+    @Inject
+    lateinit var serverRepository: ServerRepository
+
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
@@ -31,7 +31,6 @@ class App : Application(), HasActivityInjector {
 
         // Dagger
         DaggerAppComponent.builder()
-
             .baseNetworkModule(BaseNetworkModule(BASE_URL))
             .build()
             .inject(this)
@@ -40,15 +39,11 @@ class App : Application(), HasActivityInjector {
         TwinKill.init(
             TwinKill
                 .builder()
-
                 .setNeedDeepCheckOnNetworkResponse(true)
                 .addOkHttpInterceptor(CurlInterceptor())
-
-
                 .setDefaultFont(GoogleFonts.GoogleSansRegular)
                 .build()
         )
-
     }
 
 
