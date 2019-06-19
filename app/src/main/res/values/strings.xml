@@ -9,4 +9,5 @@
     <string name="dialog_title_choose_brush">Choose Brush</string>
     <string name="action_dismiss">DISMISS</string>
     <string name="action_undo">Undo</string>
+    <string name="action_next">NEXT</string>
 </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress AndroidUnknownAttribute -->
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidUnknownAttribute -->
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -31,6 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <!--Brushes-->
         <androidx.recyclerview.widget.RecyclerView

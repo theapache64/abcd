@@ -30,8 +30,10 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
     }
 
     private lateinit var binding: ActivityDrawBinding
+
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+
     private lateinit var viewModel: DrawViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +83,7 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
     }
 
     private fun showBrushChooser() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private fun showBrushesFragment() {
