@@ -18,7 +18,14 @@
         tools:showIn="@layout/activity_draw">
 
         <!--Brush size chooser-->
-        <!--TODO : Implement seekbar here-->
+        <SeekBar
+            android:id="@+id/sb_brush_size"
+            android:layout_width="0dp"
+            android:min="10"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.theapache64.abcd.ui.widgets.SpadeCanvas
             android:id="@+id/spade_canvas"

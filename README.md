@@ -36,3 +36,12 @@ http://3.16.206.30:443/gaugan_submit_map \
 curl -X POST \
   'http://3.16.206.30:443/gaugan_receive_image?name=18%2F06%2F2019%2C1560832493597-234949015&style_name=2&artistic_style_name=none'
  ```
+
+## TODOs
+
+ -[x] Splash
+ -[ ] SpadeCanvas
+ -[ ] Brush Size
+ -[ ] Styles
+ -[ ] Artistics Styles
+ 
