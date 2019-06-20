@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.ui.activities.draw.DrawViewModel
 import com.theapache64.abcd.ui.activities.splash.SplashViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesViewModel
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeViewModel
 import com.theapache64.twinkill.di.modules.BaseViewModelModule
 import com.theapache64.twinkill.utils.viewmodel.ViewModelKey
 import dagger.Binds
@@ -30,6 +31,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BrushesViewModel::class)
     abstract fun bindBrushesViewModel(viewModel: BrushesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BrushSizeViewModel::class)
+    abstract fun bindBrushSizeViewModel(viewModel: BrushSizeViewModel): ViewModel
 
 
 }

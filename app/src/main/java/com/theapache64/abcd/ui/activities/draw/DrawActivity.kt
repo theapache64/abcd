@@ -3,6 +3,8 @@ package com.theapache64.abcd.ui.activities.draw
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,13 +14,16 @@ import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
-import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
+import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
+class DrawActivity : BaseAppCompatActivity(), BrushesDialogFragment.Callback, BrushSizeDialogFragment.Callback {
+
 
     companion object {
         const val ID = R.id.MAIN_ACTIVITY_ID
@@ -29,20 +34,21 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
         }
     }
 
-    private lateinit var binding: ActivityDrawBinding
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
     private lateinit var viewModel: DrawViewModel
+    private lateinit var spadeCanvas: SpadeCanvas
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-        this.binding = bindContentView(R.layout.activity_draw)
+        val binding = bindContentView<ActivityDrawBinding>(R.layout.activity_draw)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        this.spadeCanvas = binding.iContentDraw.spadeCanvas
 
         this.viewModel = ViewModelProviders.of(this, factory).get(DrawViewModel::class.java)
         binding.viewModel = viewModel
@@ -74,7 +80,7 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
 
             // Undo canvas
             R.id.action_undo -> {
-                binding.iContentDraw.spadeCanvas.undo()
+                spadeCanvas.undo()
                 return true
             }
 
@@ -83,16 +89,22 @@ class DrawActivity : BaseAppCompatActivity(), BrushesFragment.Callback {
     }
 
     private fun showBrushChooser() {
-
+        val brushSizeFragment = BrushSizeDialogFragment.newInstance(spadeCanvas.paintStrokeWidth)
+        brushSizeFragment.show(supportFragmentManager, BrushSizeDialogFragment.TAG)
     }
 
     private fun showBrushesFragment() {
-        val brushesFragment = BrushesFragment.newInstance()
-        brushesFragment.show(supportFragmentManager, BrushesFragment.TAG)
+        val brushesFragment = BrushesDialogFragment.newInstance()
+        brushesFragment.show(supportFragmentManager, BrushesDialogFragment.TAG)
     }
 
     override fun onBrushSelected(brush: Brush) {
         supportActionBar!!.subtitle = "Brush : ${brush.name}"
+        spadeCanvas.paintStrokeColor = Color.parseColor(brush.color)
+    }
+
+    override fun onBrushSizeChanged(brushSize: Float) {
+        spadeCanvas.paintStrokeWidth = brushSize
     }
 
 }

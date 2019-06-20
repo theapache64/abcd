@@ -16,6 +16,7 @@ import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.FragmentBrushesBinding
 import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.ui.adapters.BrushesAdapter
+import com.theapache64.abcd.ui.base.BaseDialogFragment
 import com.theapache64.twinkill.logger.info
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -25,16 +26,16 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  *
  */
-class BrushesFragment private constructor() : DialogFragment(),
+class BrushesDialogFragment private constructor() : BaseDialogFragment(),
     BrushesHandler {
 
 
     companion object {
 
-        val TAG = BrushesFragment::class.java.simpleName
+        val TAG = BrushesDialogFragment::class.java.simpleName
 
-        fun newInstance(): BrushesFragment {
-            val fragment = BrushesFragment()
+        fun newInstance(): BrushesDialogFragment {
+            val fragment = BrushesDialogFragment()
             val bundle = Bundle().apply {
                 // add data here
             }
@@ -46,7 +47,7 @@ class BrushesFragment private constructor() : DialogFragment(),
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    // To get callback from BrushesFragment
+    // To get callback from BrushesDialogFragment
     private lateinit var callback: Callback
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,14 +89,6 @@ class BrushesFragment private constructor() : DialogFragment(),
 
 
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val params = dialog!!.window!!.attributes
-        params.width = WindowManager.LayoutParams.MATCH_PARENT
-        params.height = WindowManager.LayoutParams.MATCH_PARENT
-        dialog!!.window!!.attributes = params as android.view.WindowManager.LayoutParams
     }
 
 

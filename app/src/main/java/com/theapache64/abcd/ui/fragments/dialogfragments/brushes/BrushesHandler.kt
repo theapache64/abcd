@@ -1,5 +1,7 @@
 package com.theapache64.abcd.ui.fragments.dialogfragments.brushes
 
-interface BrushesHandler {
-    fun onDismissClicked()
+import com.theapache64.abcd.ui.base.BaseDialogFragmentHandler
+
+interface BrushesHandler : BaseDialogFragmentHandler {
+
 }
