@@ -1,4 +1,4 @@
-package com.theapache64.abcd.ui.fragments
+package com.theapache64.abcd.ui.fragments.dialogfragments.brushes
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,6 @@ import com.theapache64.abcd.databinding.FragmentBrushesBinding
 import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.ui.adapters.BrushesAdapter
 import com.theapache64.twinkill.logger.info
-import com.theapache64.twinkill.utils.extensions.toast
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -26,7 +25,8 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  *
  */
-class BrushesFragment private constructor() : DialogFragment(), BrushesHandler {
+class BrushesFragment private constructor() : DialogFragment(),
+    BrushesHandler {
 
 
     companion object {

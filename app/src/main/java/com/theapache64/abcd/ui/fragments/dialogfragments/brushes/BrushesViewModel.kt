@@ -1,4 +1,4 @@
-package com.theapache64.abcd.ui.fragments
+package com.theapache64.abcd.ui.fragments.dialogfragments.brushes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

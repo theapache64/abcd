@@ -5,18 +5,18 @@
 
         <variable
             name="viewModel"
-            type="com.theapache64.abcd.ui.fragments.BrushesViewModel" />
+            type="com.theapache64.abcd.ui.fragments.brushes.BrushesViewModel" />
 
         <variable
             name="handler"
-            type="com.theapache64.abcd.ui.fragments.BrushesHandler" />
+            type="com.theapache64.abcd.ui.fragments.brushes.BrushesHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.fragments.BrushesFragment">
+        tools:context=".ui.fragments.dialogfragments.brushes.BrushesFragment">
 
         <!--Title-->
         <TextView

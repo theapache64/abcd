@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
-import com.theapache64.abcd.ui.fragments.BrushesFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesFragment
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
