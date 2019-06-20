@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">@color/grey_900</color>
     <color name="colorPrimaryDark">@color/grey_900</color>
-    <color name="colorAccent">@color/colorPrimary</color>+
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="trans_black">#40000000</color>+
 
     <!--Brush colors-->
 </resources>

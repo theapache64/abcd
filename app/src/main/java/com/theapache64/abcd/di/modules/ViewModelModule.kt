@@ -3,6 +3,7 @@ package com.theapache64.abcd.di.modules
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.ui.activities.draw.DrawViewModel
 import com.theapache64.abcd.ui.activities.splash.SplashViewModel
+import com.theapache64.abcd.ui.activities.styles.StylesViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeViewModel
 import com.theapache64.twinkill.di.modules.BaseViewModelModule
@@ -36,6 +37,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BrushSizeViewModel::class)
     abstract fun bindBrushSizeViewModel(viewModel: BrushSizeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StylesViewModel::class)
+    abstract fun bindStylesViewModel(viewModel: StylesViewModel): ViewModel
 
 
 }

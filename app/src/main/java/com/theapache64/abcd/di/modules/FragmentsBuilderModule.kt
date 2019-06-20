@@ -1,6 +1,7 @@
 package com.theapache64.abcd.di.modules
 
 
+import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import dagger.Module
@@ -17,5 +18,8 @@ abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun getBrushSizeDialogFragment(): BrushSizeDialogFragment
+
+    @ContributesAndroidInjector
+    abstract fun getStylesActivity(): StylesActivity
 
 }

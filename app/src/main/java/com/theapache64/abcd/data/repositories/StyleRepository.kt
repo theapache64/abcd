@@ -9,8 +9,9 @@ import javax.inject.Singleton
 class StyleRepository @Inject constructor(
     server: Server
 ) {
-    private val styles = listOf(
+    val styles = listOf(
         Style("random", server),
+        Style("0", server),
         Style("1", server),
         Style("2", server),
         Style("3", server),
