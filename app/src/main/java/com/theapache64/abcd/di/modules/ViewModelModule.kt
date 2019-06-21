@@ -2,6 +2,7 @@ package com.theapache64.abcd.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.ui.activities.draw.DrawViewModel
+import com.theapache64.abcd.ui.activities.result.ResultViewModel
 import com.theapache64.abcd.ui.activities.splash.SplashViewModel
 import com.theapache64.abcd.ui.activities.styles.StylesViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesViewModel
@@ -42,6 +43,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(StylesViewModel::class)
     abstract fun bindStylesViewModel(viewModel: StylesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ResultViewModel::class)
+    abstract fun bindResultViewModel(viewModel: ResultViewModel): ViewModel
 
 
 }

@@ -17,24 +17,32 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
+            android:name=".ui.activities.result.ResultActivity"
+            android:label="@string/title_activity_result"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
             android:name=".ui.activities.styles.StylesActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <!--Splash-->
+        <activity
+            android:name=".ui.activities.splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity
-            android:name=".ui.activities.splash.SplashActivity"
-            android:theme="@style/SplashTheme">
 
-        </activity> <!-- Main -->
+        <!-- Main -->
         <activity
             android:name=".ui.activities.draw.DrawActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

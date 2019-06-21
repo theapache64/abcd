@@ -11,7 +11,10 @@ class StylesViewModel @Inject constructor(
     stylesRepository: StyleRepository
 ) : ViewModel() {
 
-    val styles = MutableLiveData(stylesRepository.styles)
+    private val styles = MutableLiveData(stylesRepository.styles)
     fun getStyles(): LiveData<List<Style>> = styles
+
+    private val artisticStyles = MutableLiveData(stylesRepository.artisticStyles)
+    fun getArtisticStyles(): LiveData<List<Style>> = artisticStyles
 
 }

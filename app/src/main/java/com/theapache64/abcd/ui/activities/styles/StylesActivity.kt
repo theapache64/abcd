@@ -17,16 +17,23 @@ import javax.inject.Inject
 
 class StylesActivity : BaseAppCompatActivity() {
 
+    enum class Mode {
+        STYLE, ARTISTIC_STYLE
+    }
+
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
     companion object {
 
+        private const val KEY_MODE = "mode"
         private const val KEY_MAP_FILE = "map_file"
 
-        fun getStartIntent(context: Context, mapFile: File): Intent {
+
+        fun getStartIntent(context: Context, mode: Mode, mapFile: File): Intent {
             return Intent(context, StylesActivity::class.java).apply {
                 // data goes here
+                putExtra(KEY_MODE, mode)
                 putExtra(KEY_MAP_FILE, mapFile)
             }
         }
@@ -36,11 +43,53 @@ class StylesActivity : BaseAppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         val binding = bindContentView<ActivityStylesBinding>(R.layout.activity_styles)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        // Getting param
+        val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
+        val mode = intent.getSerializableExtra(KEY_MODE) as Mode
+
         val viewModel = ViewModelProviders.of(this, factory).get(StylesViewModel::class.java)
 
-        viewModel.getStyles().observe(this, Observer {
-            binding.rvStyles.adapter = StylesAdapter(this, it) {
+        val titleRes: Int = when (mode) {
 
+            Mode.STYLE -> {
+                watchForStyles(viewModel, binding, mapFile)
+                R.string.title_styles_activity
+            }
+
+            Mode.ARTISTIC_STYLE -> {
+                watchForArtisticStyles(viewModel, binding)
+                R.string.title_artistic_styles_activity
+            }
+        }
+
+        supportActionBar!!.title = getString(titleRes)
+
+    }
+
+    private fun watchForArtisticStyles(
+        viewModel: StylesViewModel,
+        binding: ActivityStylesBinding
+    ) {
+        viewModel.getArtisticStyles().observe(this, Observer {
+            binding.rvStyles.adapter = StylesAdapter(this, it) { position ->
+                // artistic style clicked
+
+            }
+        })
+    }
+
+    private fun watchForStyles(
+        viewModel: StylesViewModel,
+        binding: ActivityStylesBinding,
+        mapFile: File
+    ) {
+        viewModel.getStyles().observe(this, Observer {
+            binding.rvStyles.adapter = StylesAdapter(this, it) { position ->
+                // style clicked
+                startActivity(getStartIntent(this, Mode.ARTISTIC_STYLE, mapFile))
             }
         })
     }

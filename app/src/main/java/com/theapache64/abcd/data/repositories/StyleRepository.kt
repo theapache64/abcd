@@ -24,7 +24,8 @@ class StyleRepository @Inject constructor(
         Style("10", server)
     )
 
-    private val artisticStyles = listOf(
+    val artisticStyles = listOf(
+        Style("random", server),
         Style("candy", server),
         Style("mosaic", server),
         Style("rain-princess-cropped", server),

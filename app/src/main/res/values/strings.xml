@@ -12,4 +12,7 @@
     <string name="action_next">NEXT</string>
     <string name="dialog_title_change_brush_size">Brush size</string>
     <string name="action_apply">APPLY</string>
+    <string name="title_styles_activity">Choose style</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_artistic_styles_activity">Choose artistic style</string>
 </resources>

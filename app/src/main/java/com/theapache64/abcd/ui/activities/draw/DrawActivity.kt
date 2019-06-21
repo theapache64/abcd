@@ -3,7 +3,6 @@ package com.theapache64.abcd.ui.activities.draw
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -14,15 +13,20 @@ import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
+import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
+import java.io.File
 import javax.inject.Inject
 
-class DrawActivity : BaseAppCompatActivity(), BrushesDialogFragment.Callback, BrushSizeDialogFragment.Callback {
+class DrawActivity : BaseAppCompatActivity(),
+    DrawHandler,
+    BrushesDialogFragment.Callback,
+    BrushSizeDialogFragment.Callback {
 
 
     companion object {
@@ -52,6 +56,7 @@ class DrawActivity : BaseAppCompatActivity(), BrushesDialogFragment.Callback, Br
 
         this.viewModel = ViewModelProviders.of(this, factory).get(DrawViewModel::class.java)
         binding.viewModel = viewModel
+        binding.handler = this
 
         showBrushesFragment()
 
@@ -105,6 +110,16 @@ class DrawActivity : BaseAppCompatActivity(), BrushesDialogFragment.Callback, Br
 
     override fun onBrushSizeChanged(brushSize: Float) {
         spadeCanvas.paintStrokeWidth = brushSize
+    }
+
+    override fun onNextClicked() {
+        startActivity(
+            StylesActivity.getStartIntent(
+                this,
+                StylesActivity.Mode.STYLE,
+                File("")
+            )
+        )
     }
 
 }

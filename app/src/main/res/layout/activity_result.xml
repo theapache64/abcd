@@ -8,19 +8,14 @@
 
         <variable
             name="viewModel"
-            type="com.theapache64.abcd.ui.activities.draw.DrawViewModel" />
-
-
-        <variable
-            name="handler"
-            type="com.theapache64.abcd.ui.activities.draw.DrawHandler" />
+            type="com.theapache64.abcd.ui.activities.result.ResultViewModel" />
 
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".DrawActivity">
+        tools:context=".ui.activities.result.ResultActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -37,10 +32,16 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include
-            android:id="@+id/i_content_draw"
-            layout="@layout/content_draw"
-            bind:handler="@{handler}"
+            layout="@layout/content_result"
             bind:viewModel="@{viewModel}" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -8,41 +8,31 @@
             name="style"
             type="com.theapache64.abcd.models.Style" />
 
-        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--Image-->
-        <ImageView
-            android:id="@+id/iv_style"
-            android:layout_width="0dp"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{style.imageUrl}"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!--Selected Image-->
-        <ImageView
-            android:id="@+id/iv_is_selected"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@color/trans_black"
-            android:scaleType="center"
-            android:src="@drawable/ic_done_white"
-            android:visibility="@{style.isSelected ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_style"
-            app:layout_constraintEnd_toEndOf="@id/iv_style"
-            app:layout_constraintStart_toStartOf="@id/iv_style"
-            app:layout_constraintTop_toTopOf="@id/iv_style"
-            tools:ignore="ContentDescription" />
+            <!--Image-->
+            <ImageView
+                android:id="@+id/iv_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{style.imageUrl}"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
