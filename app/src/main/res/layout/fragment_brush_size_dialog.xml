@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="18dp"
-            android:progress="@={viewModel.brushSize}"
+            android:progress="@={viewModel.progress}"
             app:layout_constraintBottom_toTopOf="@id/b_dismiss"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
             app:layout_constraintHeight_default="wrap"

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.FragmentBrushSizeDialogBinding
 import com.theapache64.abcd.ui.base.BaseDialogFragment
+import com.theapache64.abcd.utils.BrushUtils
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
@@ -34,7 +35,6 @@ class BrushSizeDialogFragment : BaseDialogFragment(), BrushSizeHandler {
 
     companion object {
 
-        const val BRUSH_SIZE_FACTOR = 3f
         const val KEY_CURRENT_BRUSH_SIZE = "current_brush_size"
         val TAG = BrushSizeDialogFragment::class.java.simpleName
 
@@ -76,7 +76,7 @@ class BrushSizeDialogFragment : BaseDialogFragment(), BrushSizeHandler {
         this.viewModel = ViewModelProviders.of(this, factory).get(BrushSizeViewModel::class.java)
 
         // init values
-        viewModel.brushSize = (currentBrushSize / BRUSH_SIZE_FACTOR).toInt()
+        viewModel.progress = BrushUtils.toProgress(currentBrushSize)
 
         binding.viewModel = viewModel
         binding.handler = this
@@ -89,7 +89,7 @@ class BrushSizeDialogFragment : BaseDialogFragment(), BrushSizeHandler {
     }
 
     override fun onApplyClicked() {
-        callback.onBrushSizeChanged(viewModel.brushSize * BRUSH_SIZE_FACTOR)
+        callback.onBrushSizeChanged(BrushUtils.toBrushSize(viewModel.progress))
         dismiss()
     }
 

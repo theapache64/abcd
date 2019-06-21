@@ -726,6 +726,32 @@ class SpadeCanvas : View {
         return byteArrayOutputStream.toByteArray()
     }
 
+    private var realWidth: Int = 0
+    private var realHeight: Int = 0
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        this.realWidth = w
+        this.realHeight = h
+    }
+
+    fun drawSkyAndSea(
+        skyColor: Int,
+        seaColor: Int
+    ) {
+
+        // sky
+        val sky = Path()
+        paintStrokeColor = skyColor
+        paintFillColor = skyColor
+        paintStyle = Paint.Style.FILL_AND_STROKE
+        sky.addRect(0f, 0f, width.toFloat(), height.toFloat(), Path.Direction.CW)
+        this.updateHistory(sky)
+
+        this.invalidate()
+    }
+
     companion object {
 
         /**

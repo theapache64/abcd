@@ -33,6 +33,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.theapache64.twinkill.ui.widgets.LoadingView
+            android:id="@+id/lv_submit_map"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/spade_canvas"
+            app:layout_constraintEnd_toEndOf="@id/spade_canvas"
+            app:layout_constraintStart_toStartOf="@id/spade_canvas"
+            app:layout_constraintTop_toTopOf="@id/spade_canvas" />
 
         <!--Next-->
         <com.google.android.material.button.MaterialButton
@@ -45,5 +53,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

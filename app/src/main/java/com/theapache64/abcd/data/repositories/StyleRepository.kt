@@ -9,6 +9,7 @@ import javax.inject.Singleton
 class StyleRepository @Inject constructor(
     server: Server
 ) {
+
     val styles = listOf(
         Style("random", server),
         Style("0", server),
@@ -39,4 +40,7 @@ class StyleRepository @Inject constructor(
         Style("art6", server),
         Style("art7", server)
     )
+
+
+
 }

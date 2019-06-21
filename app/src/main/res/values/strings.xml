@@ -15,4 +15,6 @@
     <string name="title_styles_activity">Choose style</string>
     <string name="title_activity_result">ResultActivity</string>
     <string name="title_artistic_styles_activity">Choose artistic style</string>
+    <string name="message_uploading_map">Submitting segmentation map...</string>
+    <string name="error_uploading_failed">Failed to upload segmentation map. Please try again later \\n\\nERROR : %s</string>
 </resources>

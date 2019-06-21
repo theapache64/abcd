@@ -7,13 +7,18 @@ import javax.inject.Singleton
 @Singleton
 class BrushRepository @Inject constructor() {
 
+    companion object {
+        private const val KEY_SEA = "Sea"
+        private const val KEY_SKY = "Sky"
+    }
+
     val brushes = listOf(
-        Brush("Sky", "#9ceedd"),
+        Brush(KEY_SKY, "#9ceedd"),
         Brush("Tree", "#a8c832"),
         Brush("Cloud", "#696969"),
         Brush("Mountain", "#869664"),
         Brush("Grass", "#7bc800"),
-        Brush("Sea", "#9ac6da"),
+        Brush(KEY_SEA, "#9ac6da"),
         Brush("River", "#9364c8"),
         Brush("Rock", "#956432"),
         Brush("Plant", "#8de61e"),
@@ -29,4 +34,33 @@ class BrushRepository @Inject constructor() {
         Brush("Wood", "#b57b00"),
         Brush("Gravel", "#7c32c8")
     )
+
+    /**
+     * Returns sea in first and sky in second
+     */
+    fun getSeaAndSky(): Pair<Brush, Brush> {
+
+        var sea: Brush? = null
+        var sky: Brush? = null
+
+        for (brush in brushes) {
+
+            if (brush.name == KEY_SKY) {
+                sky = brush
+            } else if (brush.name == KEY_SEA) {
+                sea = brush
+            }
+
+            if (sea != null && sky != null) {
+                // sea and sky found, let's stop the loop
+                break
+            }
+        }
+
+        require(sea != null) { "Couldn't find sea from brushes" }
+        require(sky != null) { "Couldn't find sky from brushes" }
+
+
+        return Pair(sea, sky)
+    }
 }

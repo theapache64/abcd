@@ -4,6 +4,5 @@ import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
 class BrushSizeViewModel @Inject constructor() : ViewModel() {
-    var brushSize = 0
-
+    var progress = 0
 }
