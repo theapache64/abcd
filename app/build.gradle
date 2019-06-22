@@ -80,6 +80,9 @@ dependencies {
     // Dexter
     implementation 'com.karumi:dexter:5.0.0'
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
     // Test
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test:runner:$runner_version"

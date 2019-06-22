@@ -12,10 +12,11 @@ class StyleRepository @Inject constructor(
 
     companion object {
         private const val CODE_NONE = "none"
+        const val CODE_RANDOM = "random"
     }
 
     val styles = listOf(
-        Style("Random", "random", server),
+        Style("Random", CODE_RANDOM, server),
         Style("Nightfall", "0", server),
         Style("Highway", "1", server),
         Style("Loch", "2", server),

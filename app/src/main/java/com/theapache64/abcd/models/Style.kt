@@ -1,5 +1,6 @@
 package com.theapache64.abcd.models
 
+import com.theapache64.abcd.data.repositories.StyleRepository
 import java.io.Serializable
 
 open class Style(
@@ -13,7 +14,8 @@ open class Style(
         val ALL_LETTERS = Regex("[A-Za-z]+")
     }
 
-    val imageUrl = if (code == "random")
+    val imageUrl = if (code == StyleRepository.CODE_RANDOM)
+    // Random image url
         "https://i.imgur.com/6ckpkfe.png"
     else
         "http://${server.ip}/styles/$code.jpg"

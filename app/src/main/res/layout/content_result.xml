@@ -6,6 +6,8 @@
         <variable
             name="viewModel"
             type="com.theapache64.abcd.ui.activities.result.ResultViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <com.theapache64.twinkill.ui.widgets.CustomSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,11 +24,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--ImageView-->
+            <!--Output-->
             <ImageView
                 android:id="@+id/iv_gaugan_output"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <!--Input-->
+            <ImageView
+                android:id="@+id/iv_gaugan_input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="@{viewModel.isInputVisible ? View.VISIBLE : View.GONE}"
+                app:imageUrl2="@{viewModel.inputUri}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
