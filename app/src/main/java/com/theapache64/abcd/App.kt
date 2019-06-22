@@ -4,6 +4,7 @@ package com.theapache64.abcd
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
+import androidx.multidex.MultiDexApplication
 import com.theapache64.abcd.di.components.DaggerAppComponent
 import com.theapache64.twinkill.TwinKill
 import com.theapache64.twinkill.googlefonts.GoogleFonts
@@ -15,7 +16,7 @@ import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class App : Application(), HasActivityInjector, HasSupportFragmentInjector {
+class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
 
 
     @Inject
