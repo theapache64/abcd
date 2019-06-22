@@ -34,7 +34,7 @@ http://3.16.206.30:443/gaugan_submit_map \
  
  ```curl
 curl -X POST \
-  'http://3.16.206.30:443/gaugan_receive_image?name=18%2F06%2F2019%2C1560832493597-234949015&style_name=2&artistic_style_name=none'
+  'http://3.16.206.30:443/gaugan_receive_image?name=18%2F06%2F2019%2C1560832493597-234949015&style_name=2&art_style_name=none'
  ```
 
 ## TODOs

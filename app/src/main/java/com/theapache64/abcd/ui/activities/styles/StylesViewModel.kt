@@ -14,7 +14,7 @@ class StylesViewModel @Inject constructor(
     private val styles = MutableLiveData(stylesRepository.styles)
     fun getStyles(): LiveData<List<Style>> = styles
 
-    private val artisticStyles = MutableLiveData(stylesRepository.artisticStyles)
-    fun getArtisticStyles(): LiveData<List<Style>> = artisticStyles
+    private val artStyles = MutableLiveData(stylesRepository.artStyles)
+    fun getArtStyles(): LiveData<List<Style>> = artStyles
 
 }

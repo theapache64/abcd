@@ -37,7 +37,7 @@ class GauganRepository @Inject constructor(
         val formBody = FormBody.Builder()
             .add("name", request.mapFile.nameWithoutExtension)
             .add("style_name", request.style.code)
-            .add("artistic_style_name", request.artisticStyle.code)
+            .add("art_style_name", request.artStyle.code)
             .build()
 
         // Building server url

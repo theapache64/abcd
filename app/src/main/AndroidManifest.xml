@@ -25,6 +25,7 @@
 
         <activity
             android:name=".ui.activities.styles.StylesActivity"
+            android:label="@string/title_activity_styles"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

@@ -49,7 +49,7 @@ class ResultActivity : BaseAppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = bindContentView<ActivityResultBinding>(R.layout.activity_result)
         setSupportActionBar(binding.toolbar)
-        supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val viewModel = ViewModelProviders.of(this, factory).get(ResultViewModel::class.java)
         binding.viewModel = viewModel

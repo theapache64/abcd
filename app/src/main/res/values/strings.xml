@@ -12,9 +12,9 @@
     <string name="action_next">NEXT</string>
     <string name="dialog_title_change_brush_size">Brush size</string>
     <string name="action_apply">APPLY</string>
-    <string name="title_styles_activity">Choose style</string>
+    <string name="title_activity_styles">Choose style</string>
     <string name="title_activity_result">Output</string>
-    <string name="title_artistic_styles_activity">Choose artistic style</string>
+    <string name="title_art_styles_activity">Choose artistic style</string>
     <string name="message_uploading_map">Submitting segmentation map...</string>
     <string name="error_uploading_failed_seg_map">Failed to upload segmentation map. Please try again later \\n\\nERROR : %s</string>
     <string name="error_uploading_failed_seg_map_server_error">Failed to upload segmentation map. Please try again later \\n\\nERROR : SERVER_ERROR</string>

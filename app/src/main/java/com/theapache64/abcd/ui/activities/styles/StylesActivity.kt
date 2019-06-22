@@ -60,8 +60,6 @@ class StylesActivity : BaseAppCompatActivity() {
             }
         })
 
-        supportActionBar!!.title = getString(R.string.title_styles_activity)
-
     }
 
 }

@@ -29,7 +29,7 @@ class StyleRepository @Inject constructor(
         Style("Eve", "10", server)
     )
 
-    val artisticStyles = listOf(
+    val artStyles = listOf(
         Style("None", CODE_NONE, server),
         Style("Candy", "candy", server),
         Style("Mosaic", "mosaic", server),
@@ -46,15 +46,15 @@ class StyleRepository @Inject constructor(
     )
 
     fun getNoArtStyle(): Style {
-        var noneArtisticStyle: Style? = null
-        for (style in artisticStyles) {
+        var noneArtStyle: Style? = null
+        for (style in artStyles) {
             if (style.code == CODE_NONE) {
-                noneArtisticStyle = style
+                noneArtStyle = style
                 break
             }
         }
-        require(noneArtisticStyle != null) { "Couldn't find none artistic style" }
-        return noneArtisticStyle
+        require(noneArtStyle != null) { "Couldn't find none artistic style" }
+        return noneArtStyle
     }
 
 }
