@@ -47,7 +47,8 @@ curl -X POST \
  - [ ] Share output
  - [ ] Share segmentation map
  - [ ] Share output + segmentation map
- - [ ] Input/Output side by side view
+ - [x] Input/Output side by side view
  - [ ] Add random and none image
+ - [ ] Random image support
  
   

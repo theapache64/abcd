@@ -71,6 +71,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         binding.viewModel = viewModel
 
         val lvReceiveImage = binding.iContentResult.lvReceiveImage
+        lvReceiveImage.setTextColor(android.R.color.white)
         lvReceiveImage.setRetryCallback(object : LoadingView.RetryCallback {
             override fun onRetryClicked() {
                 viewModel.loadOutput(imageRequest)
