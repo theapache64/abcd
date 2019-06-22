@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.theapache64.abcd.R
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
+import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
 import com.theapache64.twinkill.network.utils.Resource
@@ -25,14 +26,12 @@ class ResultActivity : BaseAppCompatActivity() {
 
         private const val KEY_MAP_FILE = "map_file"
         private const val KEY_STYLE = "style"
-        private const val KEY_ARTISTIC_STYLE = "artistic_style"
 
         fun getStartIntent(context: Context, mapFile: File, style: Style, artisticStyle: Style): Intent {
             return Intent(context, ResultActivity::class.java).apply {
                 // data goes here
                 putExtra(KEY_MAP_FILE, mapFile)
                 putExtra(KEY_STYLE, style)
-                putExtra(KEY_ARTISTIC_STYLE, artisticStyle)
             }
         }
     }
@@ -40,6 +39,9 @@ class ResultActivity : BaseAppCompatActivity() {
     private lateinit var imageRequest: ReceiveImageRequest
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var stylesRepository: StyleRepository
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +57,7 @@ class ResultActivity : BaseAppCompatActivity() {
         // Getting params
         val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val style = intent.getSerializableExtra(KEY_STYLE) as Style
-        val artisticStyle = intent.getSerializableExtra(KEY_ARTISTIC_STYLE) as Style
-        this.imageRequest = ReceiveImageRequest(mapFile, style, artisticStyle)
+        this.imageRequest = ReceiveImageRequest(mapFile, style, stylesRepository.)
 
 
         val lvReceiveImage = binding.iContentResult.lvReceiveImage

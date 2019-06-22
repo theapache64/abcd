@@ -1,5 +1,8 @@
 package com.theapache64.abcd.data.remote.updaterandom
 
-import com.theapache64.abcd.data.base.BaseSuccessResponse
+import com.squareup.moshi.Json
 
-class UpdateRandomResponse(isSuccess: Boolean) : BaseSuccessResponse(isSuccess)
+class UpdateRandomResponse(
+    @Json(name = "success")
+    val isSuccess: Boolean
+)

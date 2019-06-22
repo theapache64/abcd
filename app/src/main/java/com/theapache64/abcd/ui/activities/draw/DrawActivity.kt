@@ -34,6 +34,7 @@ import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
+import java.io.File
 import javax.inject.Inject
 
 class DrawActivity : BaseAppCompatActivity(),
@@ -89,17 +90,37 @@ class DrawActivity : BaseAppCompatActivity(),
                 }
 
                 Resource.Status.SUCCESS -> {
-                    // navigate to styles
-                    lvSubmitMap.hideLoading()
 
-                    // save bitmap as file
-                    checkFilePermission()
+                    if (it.data!!.isSuccess) {
+
+                        // navigate to styles
+                        lvSubmitMap.hideLoading()
+
+                        // save bitmap as file
+                        checkFilePermission {
+
+                            // permission granted
+                            saveBitmap { mapFile ->
+
+                                // map saved
+                                startActivity(
+                                    StylesActivity.getStartIntent(this, StylesActivity.Mode.STYLE, mapFile, null)
+                                )
+                            }
+                        }
+
+                    } else {
+                        // unknown error
+                        lvSubmitMap.showError(
+                            getString(R.string.error_uploading_failed_seg_map_server_error)
+                        )
+                    }
 
                 }
 
                 Resource.Status.ERROR -> {
                     lvSubmitMap.showError(
-                        getString(R.string.error_uploading_failed, it.message)
+                        getString(R.string.error_uploading_failed_seg_map, it.message)
                     )
                 }
             }
@@ -130,7 +151,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
     }
 
-    private fun checkFilePermission() {
+    private fun checkFilePermission(onPermissionGranted: () -> Unit) {
 
         val deniedDialogListener = DialogOnDeniedPermissionListener.Builder.withContext(this)
             .withTitle(R.string.dialog_title_permission)
@@ -145,7 +166,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
             override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                 info("Permission granted")
-                saveBitmap()
+                onPermissionGranted()
             }
         }
 
@@ -157,7 +178,7 @@ class DrawActivity : BaseAppCompatActivity(),
             .check()
     }
 
-    private fun saveBitmap() {
+    private fun saveBitmap(onBitmapSaved: (mapFile: File) -> Unit) {
 
         val mapFile =
             FileUtils.saveBitmap(
@@ -165,9 +186,7 @@ class DrawActivity : BaseAppCompatActivity(),
                 spadeCanvas.getScaleBitmap(SCALE_WIDTH, SCALE_HEIGHT)
             )
 
-        startActivity(
-            StylesActivity.getStartIntent(this, StylesActivity.Mode.STYLE, mapFile, null)
-        )
+        onBitmapSaved(mapFile)
     }
 
 
