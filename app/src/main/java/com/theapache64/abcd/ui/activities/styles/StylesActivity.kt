@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityStylesBinding
+import com.theapache64.abcd.models.Style
+import com.theapache64.abcd.ui.activities.result.ResultActivity
 import com.theapache64.abcd.ui.adapters.StylesAdapter
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
@@ -21,6 +23,7 @@ class StylesActivity : BaseAppCompatActivity() {
         STYLE, ARTISTIC_STYLE
     }
 
+    private lateinit var mapFile: File
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
@@ -28,13 +31,15 @@ class StylesActivity : BaseAppCompatActivity() {
 
         private const val KEY_MODE = "mode"
         private const val KEY_MAP_FILE = "map_file"
+        private const val KEY_STYLE = "style"
 
 
-        fun getStartIntent(context: Context, mode: Mode, mapFile: File): Intent {
+        fun getStartIntent(context: Context, mode: Mode, mapFile: File, style: Style?): Intent {
             return Intent(context, StylesActivity::class.java).apply {
                 // data goes here
                 putExtra(KEY_MODE, mode)
                 putExtra(KEY_MAP_FILE, mapFile)
+                putExtra(KEY_STYLE, style)
             }
         }
     }
@@ -47,7 +52,7 @@ class StylesActivity : BaseAppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         // Getting param
-        val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
+        this.mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val mode = intent.getSerializableExtra(KEY_MODE) as Mode
 
         val viewModel = ViewModelProviders.of(this, factory).get(StylesViewModel::class.java)
@@ -73,10 +78,18 @@ class StylesActivity : BaseAppCompatActivity() {
         viewModel: StylesViewModel,
         binding: ActivityStylesBinding
     ) {
-        viewModel.getArtisticStyles().observe(this, Observer {
-            binding.rvStyles.adapter = StylesAdapter(this, it) { position ->
+
+        val style = intent.getSerializableExtra(KEY_STYLE) as Style
+
+        viewModel.getArtisticStyles().observe(this, Observer { styles ->
+            binding.rvStyles.adapter = StylesAdapter(this, styles) { position ->
                 // artistic style clicked
 
+                val artisticStyle = styles[position]
+
+                startActivity(
+                    ResultActivity.getStartIntent(this, mapFile, style, artisticStyle)
+                )
             }
         })
     }
@@ -86,10 +99,11 @@ class StylesActivity : BaseAppCompatActivity() {
         binding: ActivityStylesBinding,
         mapFile: File
     ) {
-        viewModel.getStyles().observe(this, Observer {
-            binding.rvStyles.adapter = StylesAdapter(this, it) { position ->
+        viewModel.getStyles().observe(this, Observer { styles ->
+            binding.rvStyles.adapter = StylesAdapter(this, styles) { position ->
                 // style clicked
-                startActivity(getStartIntent(this, Mode.ARTISTIC_STYLE, mapFile))
+                val style = styles[position]
+                startActivity(getStartIntent(this, Mode.ARTISTIC_STYLE, mapFile, style))
             }
         })
     }

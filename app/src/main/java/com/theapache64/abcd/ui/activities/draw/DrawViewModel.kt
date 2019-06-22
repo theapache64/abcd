@@ -16,16 +16,19 @@ class DrawViewModel @Inject constructor(
     private val gauganRepository: GauganRepository
 ) : ViewModel() {
 
+    lateinit var submittedMapName: String
     private val submitMapRequest = MutableLiveData<SubmitMapRequest>()
+
     private val submitMapResponse = Transformations.switchMap(submitMapRequest) {
         gauganRepository.submitMap(it)
     }
 
     fun getSubmitMapResponse() = submitMapResponse
     fun submitMap(name: String, base64Image: String) {
+        this.submittedMapName = name
         submitMapRequest.value = SubmitMapRequest(base64Image, name)
     }
 
-    private val seaAndSky = MutableLiveData(brushesRepository.getSeaAndSky())
-    fun getSeaAndSky(): LiveData<Pair<Brush, Brush>> = seaAndSky
+    private val seaSkyAndMountain = MutableLiveData(brushesRepository.getSeaSkyAndMountain())
+    fun getSkySeaAndMountain(): LiveData<Triple<Brush, Brush, Brush>> = seaSkyAndMountain
 }

@@ -4,6 +4,7 @@
     package="com.theapache64.abcd">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -16,10 +17,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+
         <activity
             android:name=".ui.activities.result.ResultActivity"
             android:label="@string/title_activity_result"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.activities.styles.StylesActivity"

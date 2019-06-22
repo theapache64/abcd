@@ -726,6 +726,12 @@ class SpadeCanvas : View {
         return byteArrayOutputStream.toByteArray()
     }
 
+    fun getScaledBitmapByteArray(width: Int, height: Int): ByteArray {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        this.getScaleBitmap(width, height).compress(CompressFormat.PNG, 100, byteArrayOutputStream)
+        return byteArrayOutputStream.toByteArray()
+    }
+
     private var realWidth: Int = 0
     private var realHeight: Int = 0
 
@@ -736,9 +742,13 @@ class SpadeCanvas : View {
         this.realHeight = h
     }
 
+    /**
+     * Draws gaugan sky and sea
+     */
     fun drawSkyAndSea(
+        seaColor: Int,
         skyColor: Int,
-        seaColor: Int
+        mountainColor: Int
     ) {
 
         // sky
@@ -748,6 +758,19 @@ class SpadeCanvas : View {
         paintStyle = Paint.Style.FILL_AND_STROKE
         sky.addRect(0f, 0f, width.toFloat(), height.toFloat(), Path.Direction.CW)
         this.updateHistory(sky)
+
+        // sea
+        val sea = Path()
+        paintStrokeColor = seaColor
+        paintFillColor = seaColor
+        paintStyle = Paint.Style.FILL_AND_STROKE
+        sea.addRect(0f, height / 2f, width.toFloat(), height.toFloat(), Path.Direction.CW)
+        this.updateHistory(sea)
+
+        // Resetting paint
+        paintStyle = Paint.Style.STROKE
+        paintFillColor = mountainColor
+        paintStrokeColor = mountainColor
 
         this.invalidate()
     }

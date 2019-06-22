@@ -1,6 +1,7 @@
 package com.theapache64.abcd.ui.activities.draw
 
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -13,13 +14,21 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.single.BasePermissionListener
+import com.karumi.dexter.listener.single.CompositePermissionListener
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
+import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.abcd.utils.BrushUtils
+import com.theapache64.abcd.utils.FileUtils
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -34,6 +43,8 @@ class DrawActivity : BaseAppCompatActivity(),
 
 
     companion object {
+        const val SCALE_WIDTH = 512
+        const val SCALE_HEIGHT = 512
         const val ID = R.id.MAIN_ACTIVITY_ID
 
         fun getStartIntent(context: Context): Intent {
@@ -81,6 +92,9 @@ class DrawActivity : BaseAppCompatActivity(),
                     // navigate to styles
                     lvSubmitMap.hideLoading()
 
+                    // save bitmap as file
+                    checkFilePermission()
+
                 }
 
                 Resource.Status.ERROR -> {
@@ -92,14 +106,16 @@ class DrawActivity : BaseAppCompatActivity(),
         })
 
         // Watching for sea and sky color
-        viewModel.getSeaAndSky().observe(this, Observer {
+        viewModel.getSkySeaAndMountain().observe(this, Observer {
             val sea = it.first
             val sky = it.second
+            val mountain = it.third
 
             Handler().postDelayed({
                 spadeCanvas.drawSkyAndSea(
                     Color.parseColor(sea.color),
-                    Color.parseColor(sky.color)
+                    Color.parseColor(sky.color),
+                    Color.parseColor(mountain.color)
                 )
             }, 100)
         })
@@ -109,6 +125,47 @@ class DrawActivity : BaseAppCompatActivity(),
 
 
     }
+
+    private fun checkFilePermission() {
+
+        val deniedDialogListener = DialogOnDeniedPermissionListener.Builder.withContext(this)
+            .withTitle(R.string.dialog_title_permission)
+            .withMessage(R.string.message_external_storage)
+            .withButtonText(android.R.string.ok)
+            .build()
+
+        val permissionListener = object : BasePermissionListener() {
+            override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                info("Permission denied")
+            }
+
+            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                info("Permission granted")
+                saveBitmap()
+            }
+        }
+
+        val listener = CompositePermissionListener(deniedDialogListener, permissionListener)
+
+        Dexter.withActivity(this)
+            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .withListener(listener)
+            .check()
+    }
+
+    private fun saveBitmap() {
+
+        val mapFile =
+            FileUtils.saveBitmap(
+                viewModel.submittedMapName,
+                spadeCanvas.getScaleBitmap(SCALE_WIDTH, SCALE_HEIGHT)
+            )
+
+        startActivity(
+            StylesActivity.getStartIntent(this, StylesActivity.Mode.STYLE, mapFile, null)
+        )
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -163,7 +220,8 @@ class DrawActivity : BaseAppCompatActivity(),
     override fun onNextClicked() {
 
         // Upload image
-        val base64Image = Base64.encodeToString(spadeCanvas.bitmapAsByteArray, Base64.DEFAULT)
+        val base64Image =
+            Base64.encodeToString(spadeCanvas.getScaledBitmapByteArray(SCALE_WIDTH, SCALE_HEIGHT), Base64.DEFAULT)
         val name = "${System.nanoTime()}abcd${System.currentTimeMillis()}"
 
         viewModel.submitMap(name, base64Image)
