@@ -221,6 +221,11 @@ class DrawActivity : BaseAppCompatActivity(),
                 return true
             }
 
+            R.id.action_redo -> {
+                spadeCanvas.redo()
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

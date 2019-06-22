@@ -1,22 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.theapache64.abcd.MainActivity">
+    tools:context="com.theapache64.abcd.ui.activities.draw.DrawActivity">
+
+    <!--Redo -->
+    <item
+        android:id="@+id/action_redo"
+        android:icon="@drawable/ic_redo_white"
+        android:title="@string/action_redo"
+        app:showAsAction="always" />
 
     <!--Undo -->
     <item
         android:id="@+id/action_undo"
         android:icon="@drawable/ic_undo_white"
         android:title="@string/action_undo"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
 
     <!--Brush-->
     <item
         android:id="@+id/action_choose_brush"
         android:icon="@drawable/ic_brush_style_white"
         android:title="@string/action_brushes"
-        app:showAsAction="ifRoom" />
-
+        app:showAsAction="always" />
 
     <!--Brush Size-->
     <item
