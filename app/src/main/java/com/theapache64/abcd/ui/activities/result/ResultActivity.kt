@@ -61,6 +61,7 @@ class ResultActivity : BaseAppCompatActivity() {
         viewModel.getGauganOutput().observe(this, Observer { bitmap ->
 
             when (bitmap.status) {
+
                 Resource.Status.LOADING -> {
                     lvReceiveImage.showLoading(R.string.message_loading_image)
                 }

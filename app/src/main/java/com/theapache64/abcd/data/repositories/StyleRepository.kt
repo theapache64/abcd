@@ -11,36 +11,35 @@ class StyleRepository @Inject constructor(
 ) {
 
     val styles = listOf(
-        Style("random", server),
-        Style("0", server),
-        Style("1", server),
-        Style("2", server),
-        Style("3", server),
-        Style("4", server),
-        Style("5", server),
-        Style("6", server),
-        Style("7", server),
-        Style("8", server),
-        Style("9", server),
-        Style("10", server)
+        Style("Random", "random", server),
+        Style("Nightfall", "0", server),
+        Style("Highway", "1", server),
+        Style("Loch", "2", server),
+        Style("Dusk", "3", server),
+        Style("Twilight", "4", server),
+        Style("Dawn", "5", server),
+        Style("Marine", "6", server),
+        Style("Lagoon", "7", server),
+        Style("Reflection", "8", server),
+        Style("Dark", "9", server),
+        Style("Eve", "10", server)
     )
 
     val artisticStyles = listOf(
-        Style("none", server),
-        Style("candy", server),
-        Style("mosaic", server),
-        Style("rain-princess-cropped", server),
-        Style("udnie", server),
-        Style("art0", server),
-        Style("art1", server),
-        Style("art2", server),
-        Style("art3", server),
-        Style("art4", server),
-        Style("art5", server),
-        Style("art6", server),
-        Style("art7", server)
+        Style("None", "none", server),
+        Style("Candy", "candy", server),
+        Style("Mosaic", "mosaic", server),
+        Style("Rain Princess", "rain-princess-cropped", server),
+        Style("Udnie", "udnie", server),
+        Style("Wassily", "art0", server),
+        Style("Turcato", "art1", server),
+        Style("Asheville", "art2", server),
+        Style("Mathias", "art3", server),
+        Style("WWH", "art4", server),
+        Style("La Muse", "art5", server),
+        Style("Self", "art6", server),
+        Style("En Campo", "art7", server)
     )
-
 
 
 }

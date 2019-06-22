@@ -3,6 +3,7 @@ package com.theapache64.abcd.models
 import java.io.Serializable
 
 open class Style(
+    val name: String,
     val code: String,
     val server: Server
 ) : Serializable {

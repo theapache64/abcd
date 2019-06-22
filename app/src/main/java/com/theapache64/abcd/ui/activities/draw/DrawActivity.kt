@@ -118,6 +118,10 @@ class DrawActivity : BaseAppCompatActivity(),
                     Color.parseColor(mountain.color)
                 )
             }, 100)
+
+            // Mountain will be default brush
+            onBrushSelected(mountain)
+
         })
 
         // Setting default canvas properties

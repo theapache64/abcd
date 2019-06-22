@@ -53,7 +53,7 @@ class GauganRepository @Inject constructor(
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                ld.value = Resource.error("Something went wrong")
+                ld.value = Resource.error("Failed to generate image. \nERROR : ${e.message}")
             }
 
             override fun onResponse(call: Call, response: Response) {
