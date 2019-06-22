@@ -16,6 +16,7 @@
         android:id="@+id/srl_output"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_900_trans"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ui.activities.result.ResultActivity"
         tools:showIn="@layout/activity_result">
@@ -57,6 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

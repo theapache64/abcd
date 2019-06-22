@@ -11,7 +11,7 @@ class StyleRepository @Inject constructor(
 ) {
 
     companion object {
-        private const val CODE_NONE = "none"
+        const val CODE_NONE = "none"
         const val CODE_RANDOM = "random"
     }
 

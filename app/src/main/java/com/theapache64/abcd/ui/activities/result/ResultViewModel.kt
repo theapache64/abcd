@@ -8,6 +8,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.GauganRepository
+import com.theapache64.abcd.models.Style
 import com.theapache64.twinkill.network.utils.Resource
 import java.io.File
 import javax.inject.Inject
@@ -16,6 +17,7 @@ class ResultViewModel @Inject constructor(
     private val gauganRepository: GauganRepository
 ) : ViewModel() {
 
+    lateinit var style: Style
     lateinit var inputUri: String
     val isInputVisible = ObservableBoolean(false)
     private val receiveImageRequest = MutableLiveData<ReceiveImageRequest>()
@@ -32,8 +34,9 @@ class ResultViewModel @Inject constructor(
         this.isInputVisible.set(boolean)
     }
 
-    fun setInputUri(inputFile: File) {
+    fun init(inputFile: File, style: Style) {
         this.inputUri = "file://${inputFile.absolutePath}"
+        this.style = style
     }
 
 }

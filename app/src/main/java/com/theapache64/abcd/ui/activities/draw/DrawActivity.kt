@@ -29,6 +29,7 @@ import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDial
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.abcd.utils.BrushUtils
 import com.theapache64.abcd.utils.FileUtils
+import com.theapache64.abcd.utils.extensions.showErrorDialog
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -91,10 +92,9 @@ class DrawActivity : BaseAppCompatActivity(),
 
                 Resource.Status.SUCCESS -> {
 
-                    if (it.data!!.isSuccess) {
+                    lvSubmitMap.hideLoading()
 
-                        // hide loading
-                        lvSubmitMap.hideLoading()
+                    if (it.data!!.isSuccess) {
 
                         // checking file permission to save bitmap as file
                         checkFilePermission {
@@ -111,7 +111,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
                     } else {
                         // unknown error
-                        lvSubmitMap.showError(
+                        showErrorDialog(
                             getString(R.string.error_uploading_failed_seg_map_server_error)
                         )
                     }
@@ -119,7 +119,10 @@ class DrawActivity : BaseAppCompatActivity(),
                 }
 
                 Resource.Status.ERROR -> {
-                    lvSubmitMap.showError(
+
+                    lvSubmitMap.hideLoading()
+
+                    showErrorDialog(
                         getString(R.string.error_uploading_failed_seg_map, it.message)
                     )
                 }
@@ -150,6 +153,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
 
     }
+
 
     private fun checkFilePermission(onPermissionGranted: () -> Unit) {
 

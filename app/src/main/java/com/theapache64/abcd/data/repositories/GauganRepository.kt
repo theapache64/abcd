@@ -53,14 +53,20 @@ class GauganRepository @Inject constructor(
         okHttpClient.newCall(imageRequest).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                ld.value = Resource.error("Failed to generate image. \nERROR : ${e.message}")
+                ld.postValue(Resource.error("Failed to generate image. \nERROR : ${e.message}"))
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val byteStream = response.body()!!.byteStream()
-                val bitmap = BitmapFactory.decodeStream(byteStream)
+                try {
+                    val byteStream = response.body()!!.byteStream()
+                    val bitmap = BitmapFactory.decodeStream(byteStream)
 
-                ld.postValue(Resource.success(bitmap))
+                    ld.postValue(Resource.success(bitmap))
+                } catch (e: IOException) {
+                    e.printStackTrace()
+
+                    ld.postValue(Resource.error("Failed to generate image. \nERROR : ${e.message}"))
+                }
             }
 
         })

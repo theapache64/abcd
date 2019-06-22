@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.snackbar.Snackbar
 import com.theapache64.abcd.R
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.StyleRepository
@@ -20,6 +20,7 @@ import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.ui.widgets.LoadingView
 import com.theapache64.twinkill.utils.extensions.bindContentView
+import com.theapache64.twinkill.utils.extensions.toast
 import dagger.android.AndroidInjection
 import java.io.File
 import javax.inject.Inject
@@ -58,14 +59,14 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-
         // Getting params
         val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val style = intent.getSerializableExtra(KEY_STYLE) as Style
         this.imageRequest = ReceiveImageRequest(mapFile, style, stylesRepository.getNoArtStyle())
 
+
         this.viewModel = ViewModelProviders.of(this, factory).get(ResultViewModel::class.java)
-        viewModel.setInputUri(mapFile)
+        viewModel.init(mapFile, style)
 
         binding.viewModel = viewModel
 
@@ -129,6 +130,19 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         // Finally
         viewModel.loadOutput(imageRequest)
 
+        Handler().postDelayed({
+            updateSubtitle(style, null)
+        }, 100)
+    }
+
+    private fun updateSubtitle(style: Style, artStyle: Style?) {
+        val subTitle = if (artStyle == null || artStyle.code == StyleRepository.CODE_NONE) {
+            style.name
+        } else {
+            "${style.name} + ${artStyle.name}"
+        }
+
+        supportActionBar!!.subtitle = subTitle
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -156,16 +170,18 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
     }
 
     private fun showShareDialog() {
-
+        toast("coming soon")
     }
 
     private fun showArtStyleDialogFragment() {
         ArtStylesDialogFragment.newInstance().show(supportFragmentManager, ArtStylesDialogFragment.TAG)
     }
 
-    override fun onArtStyleSelected(style: Style) {
-        this.imageRequest.artStyle = style
+    override fun onArtStyleSelected(artStyle: Style) {
+        this.imageRequest.artStyle = artStyle
         viewModel.loadOutput(imageRequest)
+
+        updateSubtitle(viewModel.style, artStyle)
     }
 
 }
