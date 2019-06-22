@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.theapache64.abcd.data.remote.ApiInterface
+import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.models.Server
 import com.theapache64.abcd.models.Style
@@ -28,21 +29,22 @@ class GauganRepository @Inject constructor(
         submitMapRequest.name
     )
 
-    fun receiveImage(mapFile: File, style: Style, artisticStyle: Style): LiveData<Resource<Bitmap>> {
+    fun receiveImage(request: ReceiveImageRequest): LiveData<Resource<Bitmap>> {
+
         val ld = MutableLiveData<Resource<Bitmap>>()
 
         // Building form body
         val formBody = FormBody.Builder()
-            .add("name", mapFile.nameWithoutExtension)
-            .add("style_name", style.code)
-            .add("artistic_style_name", artisticStyle.code)
+            .add("name", request.mapFile.nameWithoutExtension)
+            .add("style_name", request.style.code)
+            .add("artistic_style_name", request.artisticStyle.code)
             .build()
 
         // Building server url
         val url = "http://${server.ip}:443/gaugan_receive_image"
 
         // Building request
-        val request = Request.Builder()
+        val imageRequest = Request.Builder()
             .url(url)
             .method("POST", formBody)
             .build()
@@ -50,7 +52,7 @@ class GauganRepository @Inject constructor(
         ld.value = Resource.loading()
 
         // Processing request
-        okHttpClient.newCall(request).enqueue(object : Callback {
+        okHttpClient.newCall(imageRequest).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 ld.value = Resource.error("Failed to generate image. \nERROR : ${e.message}")

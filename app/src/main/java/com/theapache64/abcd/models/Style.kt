@@ -8,7 +8,7 @@ open class Style(
     val server: Server
 ) : Serializable {
     val imageUrl = if (code == "random")
-        "http://${server.ip}/random.png"
+        "https://i.imgur.com/6ckpkfe.png"
     else
         "http://${server.ip}/styles/$code.jpg"
 }

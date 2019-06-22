@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.theapache64.abcd.R
+import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
+import com.theapache64.twinkill.ui.widgets.LoadingView
 import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
 import java.io.File
@@ -35,6 +37,7 @@ class ResultActivity : BaseAppCompatActivity() {
         }
     }
 
+    private lateinit var imageRequest: ReceiveImageRequest
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
@@ -53,10 +56,15 @@ class ResultActivity : BaseAppCompatActivity() {
         val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val style = intent.getSerializableExtra(KEY_STYLE) as Style
         val artisticStyle = intent.getSerializableExtra(KEY_ARTISTIC_STYLE) as Style
+        this.imageRequest = ReceiveImageRequest(mapFile, style, artisticStyle)
 
-        viewModel.init(mapFile, style, artisticStyle)
 
         val lvReceiveImage = binding.iContentResult.lvReceiveImage
+        lvReceiveImage.setRetryCallback(object : LoadingView.RetryCallback {
+            override fun onRetryClicked() {
+                viewModel.loadOutput(imageRequest)
+            }
+        })
 
         // Get bitmap
         viewModel.getGauganOutput().observe(this, Observer { bitmap ->
@@ -77,10 +85,19 @@ class ResultActivity : BaseAppCompatActivity() {
             }
         })
 
+        // Setting refresh listener
+        binding.iContentResult.srlOutput.setOnRefreshListener {
+            viewModel.loadOutput(imageRequest)
+        }
+
+
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        // Finally
+        viewModel.loadOutput(imageRequest)
 
     }
 

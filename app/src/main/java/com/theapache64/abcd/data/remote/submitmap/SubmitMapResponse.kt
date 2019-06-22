@@ -1,8 +1,5 @@
 package com.theapache64.abcd.data.remote.submitmap
 
-import com.squareup.moshi.Json
+import com.theapache64.abcd.data.base.BaseSuccessResponse
 
-class SubmitMapResponse(
-    @Json(name = "success")
-    val isSucces: Boolean
-) {}
+class SubmitMapResponse(isSuccess: Boolean) : BaseSuccessResponse(isSuccess)

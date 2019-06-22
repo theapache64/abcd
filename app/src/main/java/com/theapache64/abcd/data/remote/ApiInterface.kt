@@ -18,5 +18,10 @@ interface ApiInterface {
         @Query("name") name: String
     ): LiveData<Resource<SubmitMapResponse>>
 
+    @POST("update_random")
+    fun updateRandom(
+        @Query("name") name: String
+    )
+
 }
 
