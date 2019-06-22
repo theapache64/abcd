@@ -6,13 +6,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dialog_title_choose_brush">Choose Brush</string>
+    <string name="dialog_title_choose_brush">Choose a brush</string>
     <string name="action_dismiss">DISMISS</string>
     <string name="action_undo">Undo</string>
     <string name="action_next">NEXT</string>
     <string name="dialog_title_change_brush_size">Brush size</string>
     <string name="action_apply">APPLY</string>
-    <string name="title_activity_styles">Choose style</string>
+    <string name="title_activity_styles">Choose a style</string>
     <string name="title_activity_result">Output</string>
     <string name="title_art_styles_activity">Choose artistic style</string>
     <string name="message_uploading_map">Uploading segmentation map…</string>
@@ -20,8 +20,8 @@
     <string name="error_uploading_failed_seg_map_server_error">Failed to upload segmentation map. Please try again later \\n\\nERROR : SERVER_ERROR</string>
     <string name="dialog_title_permission">Permission</string>
     <string name="message_external_storage">To save the segmentation map, we need WRITE storage permission</string>
-    <string name="message_loading_image">Loading image...</string>
-    <string name="dialog_title_choose_art_style">Choose art style</string>
+    <string name="message_loading_image">Loading image…</string>
+    <string name="dialog_title_choose_art_style">Choose an art style</string>
     <string name="action_art_styles">Art styles</string>
     <string name="action_share">Share</string>
 </resources>

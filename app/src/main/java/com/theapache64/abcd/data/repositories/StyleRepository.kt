@@ -16,34 +16,34 @@ class StyleRepository @Inject constructor(
     }
 
     val styles = listOf(
-        Style("Random", CODE_RANDOM, server),
-        Style("Nightfall", "0", server),
-        Style("Highway", "1", server),
-        Style("Loch", "2", server),
-        Style("Dusk", "3", server),
-        Style("Twilight", "4", server),
-        Style("Dawn", "5", server),
-        Style("Marine", "6", server),
-        Style("Lagoon", "7", server),
-        Style("Reflection", "8", server),
-        Style("Dark", "9", server),
-        Style("Eve", "10", server)
+        Style("Random", CODE_RANDOM, server, "random"),
+        Style("Nightfall", "0", server, "0"),
+        Style("Highway", "1", server, "1"),
+        Style("Loch", "2", server, "2"),
+        Style("Dusk", "3", server, "3"),
+        Style("Twilight", "4", server, "4"),
+        Style("Dawn", "5", server, "5"),
+        Style("Marine", "6", server, "6"),
+        Style("Lagoon", "7", server, "7"),
+        Style("Reflection", "8", server, "8"),
+        Style("Dark", "9", server, "9"),
+        Style("Eve", "10", server, "10")
     )
 
     val artStyles = listOf(
-        Style("None", CODE_NONE, server),
-        Style("Candy", "candy", server),
-        Style("Mosaic", "mosaic", server),
-        Style("Rain Princess", "rain-princess-cropped", server),
-        Style("Udnie", "udnie", server),
-        Style("Wassily", "art0", server),
-        Style("Turcato", "art1", server),
-        Style("Asheville", "art2", server),
-        Style("Mathias", "art3", server),
-        Style("WWH", "art4", server),
-        Style("La Muse", "art5", server),
-        Style("Self", "art6", server),
-        Style("En Campo", "art7", server)
+        Style("None", CODE_NONE, server, "none"),
+        Style("Candy", "candy", server, "candy"),
+        Style("Mosaic", "mosaic", server, "mosaic"),
+        Style("Rain Princess", "rain-princess-cropped", server, "rain"),
+        Style("Udnie", "udnie", server, "udnie"),
+        Style("Wassily", "art0", server, "0"),
+        Style("Turcato", "art1", server, "1"),
+        Style("Asheville", "art2", server, "2"),
+        Style("Mathias", "art3", server, "3"),
+        Style("WWH", "art4", server, "4"),
+        Style("La Muse", "art5", server, "5"),
+        Style("Self", "art6", server, "6"),
+        Style("En Campo", "art7", server, "7")
     )
 
     fun getNoArtStyle(): Style {
