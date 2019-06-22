@@ -39,9 +39,15 @@ curl -X POST \
 
 ## TODOs
 
- -[x] Splash
- -[ ] SpadeCanvas
- -[ ] Brush Size
- -[ ] Styles
- -[ ] Artistics Styles
+ - [x] Splash
+ - [x] SpadeCanvas
+ - [x] Brush Size
+ - [x] Styles
+ - [x] Artistics Styles
+ - [ ] Share output
+ - [ ] Share segmentation map
+ - [ ] Share output + segmentation map
+ - [ ] Input/Output side by side view
+ - [ ] Add random and none image
  
+  
