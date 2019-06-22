@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment">
+
+        <!--Title-->
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/dialog_fragment_title_style"
+            fontPath="fonts/GoogleSans-Medium.ttf"
+            android:text="@string/dialog_title_choose_art_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--Brushes-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_art_styles"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/b_dismiss"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:spanCount="2"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_style" />
+
+        <!--Dismiss-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/b_dismiss"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()-> handler.onDismissClicked()}"
+            android:text="@string/action_dismiss"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/rv_art_styles" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -21,4 +21,7 @@
     <string name="dialog_title_permission">Permission</string>
     <string name="message_external_storage">To save the segmentation map, we need WRITE storage permission</string>
     <string name="message_loading_image">Loading image...</string>
+    <string name="dialog_title_choose_art_style">Choose art style</string>
+    <string name="action_art_styles">Art styles</string>
+    <string name="action_share">Share</string>
 </resources>

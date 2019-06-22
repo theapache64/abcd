@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.theapache64.abcd.MainActivity">
+
+    <!--Art Style -->
+    <item
+        android:id="@+id/action_art_styles"
+        android:icon="@drawable/ic_art_style"
+        android:title="@string/action_art_styles"
+        app:showAsAction="always" />
+
+    <!--Share-->
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share_white"
+        android:title="@string/action_share"
+        app:showAsAction="ifRoom" />
+
+</menu>

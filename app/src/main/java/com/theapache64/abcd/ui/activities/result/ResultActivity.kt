@@ -3,6 +3,9 @@ package com.theapache64.abcd.ui.activities.result
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +15,7 @@ import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
+import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.ui.widgets.LoadingView
@@ -20,7 +24,8 @@ import dagger.android.AndroidInjection
 import java.io.File
 import javax.inject.Inject
 
-class ResultActivity : BaseAppCompatActivity() {
+class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback {
+
 
     companion object {
 
@@ -36,6 +41,7 @@ class ResultActivity : BaseAppCompatActivity() {
         }
     }
 
+    private lateinit var viewModel: ResultViewModel
     private lateinit var imageRequest: ReceiveImageRequest
     @Inject
     lateinit var factory: ViewModelProvider.Factory
@@ -51,14 +57,13 @@ class ResultActivity : BaseAppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val viewModel = ViewModelProviders.of(this, factory).get(ResultViewModel::class.java)
+        this.viewModel = ViewModelProviders.of(this, factory).get(ResultViewModel::class.java)
         binding.viewModel = viewModel
 
         // Getting params
         val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val style = intent.getSerializableExtra(KEY_STYLE) as Style
         this.imageRequest = ReceiveImageRequest(mapFile, style, stylesRepository.getNoArtStyle())
-
 
         val lvReceiveImage = binding.iContentResult.lvReceiveImage
         lvReceiveImage.setRetryCallback(object : LoadingView.RetryCallback {
@@ -91,7 +96,6 @@ class ResultActivity : BaseAppCompatActivity() {
             viewModel.loadOutput(imageRequest)
         }
 
-
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -100,6 +104,43 @@ class ResultActivity : BaseAppCompatActivity() {
         // Finally
         viewModel.loadOutput(imageRequest)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_result, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+
+            R.id.action_art_styles -> {
+                showArtStyleDialogFragment()
+                return true
+            }
+
+            R.id.action_share -> {
+                showShareDialog()
+                return true
+            }
+
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    private fun showShareDialog() {
+
+    }
+
+    private fun showArtStyleDialogFragment() {
+        ArtStylesDialogFragment.newInstance().show(supportFragmentManager, ArtStylesDialogFragment.TAG)
+    }
+
+    override fun onArtStyleSelected(style: Style) {
+        this.imageRequest.artStyle = style
+        viewModel.loadOutput(imageRequest)
     }
 
 }

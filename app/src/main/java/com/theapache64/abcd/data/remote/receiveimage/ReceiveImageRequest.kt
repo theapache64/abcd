@@ -6,5 +6,5 @@ import java.io.File
 class ReceiveImageRequest(
     val mapFile: File,
     val style: Style,
-    val artStyle: Style
+    var artStyle: Style
 )

@@ -8,10 +8,8 @@ import com.theapache64.abcd.data.remote.ApiInterface
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.models.Server
-import com.theapache64.abcd.models.Style
 import com.theapache64.twinkill.network.utils.Resource
 import okhttp3.*
-import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
@@ -36,8 +34,8 @@ class GauganRepository @Inject constructor(
         // Building form body
         val formBody = FormBody.Builder()
             .add("name", request.mapFile.nameWithoutExtension)
-            .add("style_name", request.style.code)
-            .add("art_style_name", request.artStyle.code)
+            .add("style_name", request.style.apiCode)
+            .add("artistic_style_name", request.artStyle.apiCode)
             .build()
 
         // Building server url

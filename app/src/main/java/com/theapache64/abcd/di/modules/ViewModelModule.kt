@@ -5,6 +5,7 @@ import com.theapache64.abcd.ui.activities.draw.DrawViewModel
 import com.theapache64.abcd.ui.activities.result.ResultViewModel
 import com.theapache64.abcd.ui.activities.splash.SplashViewModel
 import com.theapache64.abcd.ui.activities.styles.StylesViewModel
+import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesViewModel
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeViewModel
 import com.theapache64.twinkill.di.modules.BaseViewModelModule
@@ -22,7 +23,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     abstract fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
-
 
     @Binds
     @IntoMap
@@ -48,6 +48,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ResultViewModel::class)
     abstract fun bindResultViewModel(viewModel: ResultViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ArtStylesViewModel::class)
+    abstract fun bindArtStylesViewModel(viewModel: ArtStylesViewModel): ViewModel
 
 
 }
