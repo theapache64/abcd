@@ -93,18 +93,18 @@ class DrawActivity : BaseAppCompatActivity(),
 
                     if (it.data!!.isSuccess) {
 
-                        // navigate to styles
+                        // hide loading
                         lvSubmitMap.hideLoading()
 
-                        // save bitmap as file
+                        // checking file permission to save bitmap as file
                         checkFilePermission {
 
-                            // permission granted
+                            // permission granted, save bitmap
                             saveBitmap { mapFile ->
 
-                                // map saved
+                                // map saved, now launch styles
                                 startActivity(
-                                    StylesActivity.getStartIntent(this, StylesActivity.Mode.STYLE, mapFile, null)
+                                    StylesActivity.getStartIntent(this, mapFile)
                                 )
                             }
                         }

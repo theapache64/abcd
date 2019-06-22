@@ -27,7 +27,7 @@ class ResultActivity : BaseAppCompatActivity() {
         private const val KEY_MAP_FILE = "map_file"
         private const val KEY_STYLE = "style"
 
-        fun getStartIntent(context: Context, mapFile: File, style: Style, artisticStyle: Style): Intent {
+        fun getStartIntent(context: Context, mapFile: File, style: Style): Intent {
             return Intent(context, ResultActivity::class.java).apply {
                 // data goes here
                 putExtra(KEY_MAP_FILE, mapFile)
@@ -57,7 +57,7 @@ class ResultActivity : BaseAppCompatActivity() {
         // Getting params
         val mapFile = intent.getSerializableExtra(KEY_MAP_FILE) as File
         val style = intent.getSerializableExtra(KEY_STYLE) as Style
-        this.imageRequest = ReceiveImageRequest(mapFile, style, stylesRepository.)
+        this.imageRequest = ReceiveImageRequest(mapFile, style, stylesRepository.getNoArtStyle())
 
 
         val lvReceiveImage = binding.iContentResult.lvReceiveImage
