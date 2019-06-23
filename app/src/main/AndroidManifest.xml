@@ -43,7 +43,7 @@
         <!--Splash-->
         <activity
             android:name=".ui.activities.splash.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

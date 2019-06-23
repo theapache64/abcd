@@ -1,12 +1,24 @@
 package com.theapache64.abcd.ui.activities.splash
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.theapache64.abcd.BuildConfig
+import com.theapache64.abcd.R
+import com.theapache64.abcd.databinding.ActivitySplashBinding
 import com.theapache64.abcd.ui.activities.draw.DrawActivity
+import com.theapache64.abcd.utils.extensions.showErrorDialog
+import com.theapache64.twinkill.logger.info
+import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
+import com.theapache64.twinkill.utils.extensions.bindContentView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -18,6 +30,13 @@ class SplashActivity : BaseAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+        val binding = bindContentView<ActivitySplashBinding>(R.layout.activity_splash)
+
+        // Changing progress color
+        binding.clpbSplash.indeterminateDrawable.setColorFilter(
+            Color.WHITE,
+            PorterDuff.Mode.SRC_IN
+        )
 
         val viewModel = ViewModelProviders.of(this, factory).get(SplashViewModel::class.java)
 
@@ -36,16 +55,77 @@ class SplashActivity : BaseAppCompatActivity() {
 
         })
 
+        // Watching for version info
+        viewModel.getLatestVersionInfo().observe(this, Observer {
+            when (it.status) {
+
+                Resource.Status.LOADING -> {
+                    info("Getting version info..")
+                }
+
+                Resource.Status.SUCCESS -> {
+                    // Checking version info
+                    val latestVersionInfo = it.data?.first()
+                    if (latestVersionInfo != null) {
+                        if (BuildConfig.VERSION_CODE < latestVersionInfo.latestVersionCode) {
+                            // old version
+                            binding.clpbSplash.hide()
+                            showUpdateDialog(latestVersionInfo.versionExpiryMessage)
+
+                        } else {
+                            // up to date version
+                            viewModel.goToNextScreen()
+                        }
+                    } else {
+                        binding.clpbSplash.hide()
+                        showErrorDialog(getString(R.string.error_version_data)) {
+                            finish()
+                        }
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    binding.clpbSplash.hide()
+                    showErrorDialog(getString(R.string.error_version_check, it.message)) {
+                        finish()
+                    }
+                }
+            }
+        })
+
         // Starting splash timer
         Handler().postDelayed({
-            viewModel.goToNextScreen()
+            viewModel.checkVersion()
         }, SPLASH_DURATION)
 
     }
 
+    private fun showUpdateDialog(versionExpiryMessage: String) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.dialog_title_new_version)
+            .setMessage(versionExpiryMessage)
+            .setCancelable(false)
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                finish()
+            }
+            .setPositiveButton(R.string.action_update) { _, _ ->
+                // go to release page
+                goToReleasePage()
+                finish()
+            }
+            .create()
+            .show()
+    }
+
+    private fun goToReleasePage() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://github.com/theapache64/abcd/releases")
+        startActivity(intent)
+    }
+
 
     companion object {
-        private const val SPLASH_DURATION = 1000L
+        private const val SPLASH_DURATION = 200L
     }
 
 }

@@ -86,8 +86,11 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-
+    // MultiDex support
     implementation 'com.android.support:multidex:1.0.3'
+
+    // SafeMail
+    implementation 'com.theah64.safemail:safemail:1.0.1'
 
     // Test
     testImplementation "junit:junit:$junit_version"

@@ -34,7 +34,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
         // Dagger
         DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .baseNetworkModule(BaseNetworkModule(""))
+            .baseNetworkModule(BaseNetworkModule("https://api.sheety.co/"))
             .build()
             .inject(this)
 
@@ -43,8 +43,10 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
             TwinKill
                 .builder()
                 .addOkHttpInterceptor(CurlInterceptor())
+                .setNeedDeepCheckOnNetworkResponse(false)
                 .setDefaultFont(GoogleFonts.GoogleSansRegular)
                 .build()
+
         )
     }
 

@@ -30,4 +30,8 @@
     <string name="action_share_output">OUTPUT</string>
     <string name="action_share_map_and_output">SEG. MAP + OUTPUT</string>
     <string name="error_output_not_ready">Output not ready, please wait.</string>
+    <string name="error_version_check">Network error occurred while checking for latest version info. Please check your internet connection and try again. \nERROR : %s</string>
+    <string name="error_version_data">Something went wrong. Please try again later</string>
+    <string name="dialog_title_new_version">New version</string>
+    <string name="action_update">UPDATE</string>
 </resources>

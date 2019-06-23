@@ -2,6 +2,7 @@ package com.theapache64.abcd.di.modules
 
 import com.squareup.moshi.Moshi
 import com.theapache64.abcd.data.remote.ApiInterface
+import com.theapache64.abcd.data.remote.SheetyApiInterface
 import com.theapache64.abcd.models.Server
 import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
 import com.theapache64.twinkill.network.utils.retrofit.adapters.resourceadapter.ResourceCallAdapterFactory
@@ -36,6 +37,12 @@ class NetworkModule {
             .build()
 
         return retrofit.create(ApiInterface::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSheetyApiInterface(retrofit: Retrofit): SheetyApiInterface {
+        return retrofit.create(SheetyApiInterface::class.java)
     }
 
 
