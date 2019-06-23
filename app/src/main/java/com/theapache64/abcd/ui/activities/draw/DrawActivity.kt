@@ -51,8 +51,7 @@ class DrawActivity : BaseAppCompatActivity(),
         const val ID = R.id.MAIN_ACTIVITY_ID
 
         fun getStartIntent(context: Context): Intent {
-            val intent = Intent(context, DrawActivity::class.java)
-            return intent
+            return Intent(context, DrawActivity::class.java)
         }
     }
 
