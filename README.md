@@ -50,5 +50,6 @@ curl -X POST \
  - [x] Input/Output side by side view
  - [ ] Add random and none image
  - [ ] Random image support
+ - [ ] User name pref
  
   

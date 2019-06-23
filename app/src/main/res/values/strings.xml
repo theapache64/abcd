@@ -25,4 +25,9 @@
     <string name="action_art_styles">Art styles</string>
     <string name="action_share">Share</string>
     <string name="title_error">Error</string>
+    <string name="dialog_title_share">Share</string>
+    <string name="action_share_seg_map">SEGMENTATION MAP</string>
+    <string name="action_share_output">OUTPUT</string>
+    <string name="action_share_map_and_output">SEG. MAP + OUTPUT</string>
+    <string name="error_output_not_ready">Output not ready, please wait.</string>
 </resources>

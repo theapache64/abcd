@@ -2,10 +2,10 @@ package com.theapache64.abcd
 
 
 import android.app.Activity
-import android.app.Application
 import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
 import com.theapache64.abcd.di.components.DaggerAppComponent
+import com.theapache64.abcd.di.modules.AppModule
 import com.theapache64.twinkill.TwinKill
 import com.theapache64.twinkill.googlefonts.GoogleFonts
 import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
@@ -33,6 +33,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
 
         // Dagger
         DaggerAppComponent.builder()
+            .appModule(AppModule(this))
             .baseNetworkModule(BaseNetworkModule(""))
             .build()
             .inject(this)

@@ -1,16 +1,15 @@
 package com.theapache64.abcd.utils
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.os.Environment
-import com.theapache64.twinkill.logger.info
 import java.io.File
 import java.io.FileOutputStream
 
 object FileUtils {
 
-    fun saveBitmap(fileName: String, bitmap: Bitmap): File {
-        val extStorage = Environment.getExternalStorageDirectory().absolutePath
-        val file = File("$extStorage/abcd/$fileName.png")
+    fun saveBitmap(context: Context, fileName: String, bitmap: Bitmap): File {
+        val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "$fileName.png")
         if (!file.parentFile.exists()) {
             file.parentFile.mkdirs()
         }
@@ -19,4 +18,5 @@ object FileUtils {
         }
         return file
     }
+
 }

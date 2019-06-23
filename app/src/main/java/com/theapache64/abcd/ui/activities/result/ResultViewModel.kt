@@ -17,6 +17,8 @@ class ResultViewModel @Inject constructor(
     private val gauganRepository: GauganRepository
 ) : ViewModel() {
 
+    lateinit var mapFile: File
+    var outputFile: File? = null
     lateinit var style: Style
     lateinit var inputUri: String
     val isInputVisible = ObservableBoolean(false)
@@ -35,8 +37,10 @@ class ResultViewModel @Inject constructor(
     }
 
     fun init(inputFile: File, style: Style) {
+        this.mapFile = inputFile
         this.inputUri = "file://${inputFile.absolutePath}"
         this.style = style
     }
+
 
 }

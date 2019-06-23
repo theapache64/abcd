@@ -5,7 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +19,8 @@ import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
+import com.theapache64.abcd.utils.FileUtils
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -25,7 +31,7 @@ import dagger.android.AndroidInjection
 import java.io.File
 import javax.inject.Inject
 
-class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback {
+class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback, ShareDialogFragment.Callback {
 
 
     companion object {
@@ -94,7 +100,18 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                     ivGauganOutput.visibility = View.VISIBLE
                     lvReceiveImage.hideLoading()
 
-                    ivGauganOutput.setImageBitmap(bitmap.data)
+                    bitmap.data?.let { outputBitmap ->
+
+                        ivGauganOutput.setImageBitmap(outputBitmap)
+
+                        // Saving bitmap as file
+                        val outputFile = FileUtils.saveBitmap(
+                            this,
+                            "output_${viewModel.mapFile.nameWithoutExtension}",
+                            outputBitmap
+                        )
+                        viewModel.outputFile = outputFile
+                    }
                 }
                 Resource.Status.ERROR -> {
                     ivGauganOutput.visibility = View.GONE
@@ -108,7 +125,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
             viewModel.loadOutput(imageRequest)
         }
 
-        binding.fab.setOnTouchListener { v, event ->
+        binding.fab.setOnTouchListener { _, event ->
 
             info(event.toString())
 
@@ -171,7 +188,16 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
     }
 
     private fun showShareDialog() {
-        toast("coming soon")
+        if (viewModel.outputFile == null) {
+            toast(R.string.error_output_not_ready)
+        } else {
+
+            // Showing share dialogue
+            ShareDialogFragment.newInstance(
+                viewModel.mapFile,
+                viewModel.outputFile!!
+            ).show(supportFragmentManager, ShareDialogFragment.TAG)
+        }
     }
 
     private fun showArtStyleDialogFragment() {
@@ -183,6 +209,24 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         viewModel.loadOutput(imageRequest)
 
         updateSubtitle(viewModel.style, artStyle)
+    }
+
+    override fun performShare(file: File) {
+
+        info(file.absolutePath)
+
+        val photoURI = FileProvider.getUriForFile(
+            this,
+            applicationContext.packageName + ".fileprovider",
+            file
+        )
+
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_STREAM, photoURI)
+        intent.putExtra(Intent.EXTRA_TEXT, "Hey, look what I created using abcd.\n https://github.com/theapache64/abcd")
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.type = "image/png"
+        startActivity(Intent.createChooser(intent, "Share via"))
     }
 
 }

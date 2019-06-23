@@ -189,6 +189,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
         val mapFile =
             FileUtils.saveBitmap(
+                this,
                 viewModel.submittedMapName,
                 spadeCanvas.getScaleBitmap(SCALE_WIDTH, SCALE_HEIGHT)
             )

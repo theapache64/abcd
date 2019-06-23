@@ -732,15 +732,6 @@ class SpadeCanvas : View {
         return byteArrayOutputStream.toByteArray()
     }
 
-    private var realWidth: Int = 0
-    private var realHeight: Int = 0
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-
-        this.realWidth = w
-        this.realHeight = h
-    }
 
     /**
      * Draws gaugan sky and sea
