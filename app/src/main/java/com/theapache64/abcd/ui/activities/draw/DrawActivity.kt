@@ -141,10 +141,13 @@ class DrawActivity : BaseAppCompatActivity(),
                     Color.parseColor(sky.color),
                     Color.parseColor(mountain.color)
                 )
+
+
+                // Mountain will be default brush
+                onBrushSelected(mountain)
+
             }, 100)
 
-            // Mountain will be default brush
-            onBrushSelected(mountain)
 
         })
 
@@ -218,11 +221,6 @@ class DrawActivity : BaseAppCompatActivity(),
             // Undo canvas
             R.id.action_undo -> {
                 spadeCanvas.undo()
-                return true
-            }
-
-            R.id.action_redo -> {
-                spadeCanvas.redo()
                 return true
             }
 

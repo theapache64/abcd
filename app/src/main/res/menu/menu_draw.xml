@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.theapache64.abcd.ui.activities.draw.DrawActivity">
 
-    <!--Redo -->
-    <item
-        android:id="@+id/action_redo"
-        android:icon="@drawable/ic_redo_white"
-        android:title="@string/action_redo"
-        app:showAsAction="always" />
 
     <!--Undo -->
     <item
