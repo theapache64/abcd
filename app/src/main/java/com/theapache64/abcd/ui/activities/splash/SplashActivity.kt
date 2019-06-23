@@ -119,7 +119,7 @@ class SplashActivity : BaseAppCompatActivity() {
 
     private fun goToReleasePage() {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://github.com/theapache64/abcd/releases")
+        intent.data = Uri.parse("https://play.google.com/store/apps/details?id=$packageName")
         startActivity(intent)
     }
 

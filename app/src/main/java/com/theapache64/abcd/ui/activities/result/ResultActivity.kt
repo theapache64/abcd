@@ -249,7 +249,10 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
         val intent = Intent(Intent.ACTION_SEND)
         intent.putExtra(Intent.EXTRA_STREAM, photoURI)
-        intent.putExtra(Intent.EXTRA_TEXT, "Hey, look what I created using abcd.\n https://github.com/theapache64/abcd")
+        intent.putExtra(
+            Intent.EXTRA_TEXT,
+            "Hey, look what I created using abcd.\n\nTry and send me back yours\nhttps://play.google.com/store/apps/details?id=$packageName"
+        )
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.type = "image/png"
         startActivity(Intent.createChooser(intent, "Share via"))
