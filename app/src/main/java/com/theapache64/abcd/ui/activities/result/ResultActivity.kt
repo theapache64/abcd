@@ -20,6 +20,7 @@ import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
+import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.FileUtils
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
@@ -101,6 +102,9 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                     lvReceiveImage.hideLoading()
 
                     bitmap.data?.let { outputBitmap ->
+
+                        // Analytics
+                        AnalyticsHelper.pollStyleSubmission()
 
                         ivGauganOutput.setImageBitmap(outputBitmap)
 
@@ -213,7 +217,8 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
     override fun performShare(file: File) {
 
-        info(file.absolutePath)
+        // Analytics
+        AnalyticsHelper.pollShareSubmission()
 
         val photoURI = FileProvider.getUriForFile(
             this,

@@ -27,6 +27,7 @@ import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
+import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.BrushUtils
 import com.theapache64.abcd.utils.FileUtils
 import com.theapache64.abcd.utils.extensions.showErrorDialog
@@ -93,6 +94,9 @@ class DrawActivity : BaseAppCompatActivity(),
                 Resource.Status.SUCCESS -> {
 
                     lvSubmitMap.hideLoading()
+
+                    // Analytics
+                    AnalyticsHelper.pollMapSubmission()
 
                     if (it.data!!.isSuccess) {
 
