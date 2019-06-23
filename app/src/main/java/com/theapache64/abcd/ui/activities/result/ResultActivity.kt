@@ -81,12 +81,32 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         lvReceiveImage.setTextColor(android.R.color.white)
         lvReceiveImage.setRetryCallback(object : LoadingView.RetryCallback {
             override fun onRetryClicked() {
-                viewModel.loadOutput(imageRequest)
+                viewModel.load(imageRequest)
             }
         })
 
 
         val ivGauganOutput = binding.iContentResult.ivGauganOutput
+
+        // Get random image request
+        viewModel.getUpdateRandomResponse().observe(this, Observer { updateRequest ->
+            when (updateRequest.status) {
+                Resource.Status.LOADING -> {
+                    ivGauganOutput.visibility = View.GONE
+                    lvReceiveImage.showLoading(R.string.message_generating_with_random)
+                }
+                Resource.Status.SUCCESS -> {
+                    ivGauganOutput.visibility = View.VISIBLE
+                    lvReceiveImage.hideLoading()
+
+                    viewModel.loadDirectOutput(imageRequest)
+                }
+                Resource.Status.ERROR -> {
+                    ivGauganOutput.visibility = View.GONE
+                    lvReceiveImage.showError(updateRequest.message!!)
+                }
+            }
+        })
 
         // Get bitmap
         viewModel.getGauganOutput().observe(this, Observer { bitmap ->
@@ -117,6 +137,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                         viewModel.outputFile = outputFile
                     }
                 }
+
                 Resource.Status.ERROR -> {
                     ivGauganOutput.visibility = View.GONE
                     lvReceiveImage.showError(bitmap.message!!)
@@ -126,7 +147,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
         // Setting refresh listener
         binding.iContentResult.srlOutput.setOnRefreshListener {
-            viewModel.loadOutput(imageRequest)
+            viewModel.load(imageRequest)
         }
 
         binding.fab.setOnTouchListener { _, event ->
@@ -150,7 +171,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         }
 
         // Finally
-        viewModel.loadOutput(imageRequest)
+        viewModel.load(imageRequest)
 
         Handler().postDelayed({
             updateSubtitle(style, null)
@@ -210,7 +231,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
     override fun onArtStyleSelected(artStyle: Style) {
         this.imageRequest.artStyle = artStyle
-        viewModel.loadOutput(imageRequest)
+        viewModel.load(imageRequest)
 
         updateSubtitle(viewModel.style, artStyle)
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.theapache64.abcd.data.remote.ApiInterface
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
+import com.theapache64.abcd.data.remote.updaterandom.UpdateRandomRequest
 import com.theapache64.abcd.models.Server
 import com.theapache64.twinkill.network.utils.Resource
 import okhttp3.*
@@ -27,6 +28,9 @@ class GauganRepository @Inject constructor(
         submitMapRequest.name
     )
 
+    /**
+     * To receive image from gaugan
+     */
     fun receiveImage(request: ReceiveImageRequest): LiveData<Resource<Bitmap>> {
 
         val ld = MutableLiveData<Resource<Bitmap>>()
@@ -77,4 +81,11 @@ class GauganRepository @Inject constructor(
 
         return ld
     }
+
+    /**
+     * To update random
+     */
+    fun updateRandom(request: UpdateRandomRequest) = apiInterface.updateRandom(
+        request.fileName
+    )
 }

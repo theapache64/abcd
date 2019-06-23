@@ -138,7 +138,12 @@ class DrawActivity : BaseAppCompatActivity(),
             val sky = it.second
             val mountain = it.third
 
+            viewModel.sea = sea
+            viewModel.sky = sky
+            viewModel.mountain = mountain
+
             Handler().postDelayed({
+
                 spadeCanvas.drawSkyAndSea(
                     Color.parseColor(sea.color),
                     Color.parseColor(sky.color),
@@ -228,8 +233,30 @@ class DrawActivity : BaseAppCompatActivity(),
                 return true
             }
 
+            // new canvas
+            R.id.action_new -> {
+                getConfirmDialog(
+                    R.string.dialog_title_confirm,
+                    R.string.message_confirm_new
+                ) {
+                    performNewCanvas()
+                }.show()
+
+
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun performNewCanvas() {
+        spadeCanvas.clear()
+        spadeCanvas.drawSkyAndSea(
+            Color.parseColor(viewModel.sea.color),
+            Color.parseColor(viewModel.sky.color),
+            Color.parseColor(viewModel.mountain.color)
+        )
     }
 
     private fun showBrushChooser() {

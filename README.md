@@ -44,12 +44,13 @@ curl -X POST \
  - [x] Brush Size
  - [x] Styles
  - [x] Artistics Styles
- - [ ] Share output
- - [ ] Share segmentation map
- - [ ] Share output + segmentation map
+ - [x] Share output
+ - [x] Share segmentation map
+ - [x] Share output + segmentation map
  - [x] Input/Output side by side view
  - [ ] Add random and none image
  - [ ] Random image support
- - [ ] User name pref
- 
+ - [x] Analytics
+ - [x] New canvas
+ - [x] Version Check
   

@@ -16,6 +16,10 @@ class DrawViewModel @Inject constructor(
     private val gauganRepository: GauganRepository
 ) : ViewModel() {
 
+    lateinit var mountain: Brush
+    lateinit var sky: Brush
+    lateinit var sea: Brush
+
     lateinit var submittedMapName: String
     private val submitMapRequest = MutableLiveData<SubmitMapRequest>()
 

@@ -34,4 +34,8 @@
     <string name="error_version_data">Something went wrong. Please try again later</string>
     <string name="dialog_title_new_version">New version</string>
     <string name="action_update">UPDATE</string>
+    <string name="action_new">New</string>
+    <string name="dialog_title_confirm">Confirm</string>
+    <string name="message_confirm_new">Are you sure you want to replace the current canvas with new one ?</string>
+    <string name="message_generating_with_random">Generating with random style...</string>
 </resources>

@@ -4,6 +4,13 @@
     tools:context="com.theapache64.abcd.ui.activities.draw.DrawActivity">
 
 
+    <!--New-->
+    <item
+        android:id="@+id/action_new"
+        android:icon="@drawable/ic_open_in_new_white_24dp"
+        android:title="@string/action_new"
+        app:showAsAction="always" />
+
     <!--Undo -->
     <item
         android:id="@+id/action_undo"

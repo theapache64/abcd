@@ -13,7 +13,7 @@ open class Style(
 
     val imageUrl = if (code == StyleRepository.CODE_RANDOM)
     // Random image url
-        "https://i.imgur.com/6ckpkfe.png"
+        "https://i.imgur.com/gin0rqw.png"
     else
         "http://${server.ip}/styles/$code.jpg"
 }
