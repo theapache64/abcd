@@ -30,6 +30,7 @@ import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.BrushUtils
 import com.theapache64.abcd.utils.FileUtils
+import com.theapache64.abcd.utils.extensions.checkFilePermission
 import com.theapache64.abcd.utils.extensions.showErrorDialog
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
@@ -166,32 +167,6 @@ class DrawActivity : BaseAppCompatActivity(),
     }
 
 
-    private fun checkFilePermission(onPermissionGranted: () -> Unit) {
-
-        val deniedDialogListener = DialogOnDeniedPermissionListener.Builder.withContext(this)
-            .withTitle(R.string.dialog_title_permission)
-            .withMessage(R.string.message_external_storage)
-            .withButtonText(android.R.string.ok)
-            .build()
-
-        val permissionListener = object : BasePermissionListener() {
-            override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                info("Permission denied")
-            }
-
-            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                info("Permission granted")
-                onPermissionGranted()
-            }
-        }
-
-        val listener = CompositePermissionListener(deniedDialogListener, permissionListener)
-
-        Dexter.withActivity(this)
-            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            .withListener(listener)
-            .check()
-    }
 
     private fun saveBitmap(onBitmapSaved: (mapFile: File) -> Unit) {
 
