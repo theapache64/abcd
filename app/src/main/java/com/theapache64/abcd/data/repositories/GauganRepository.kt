@@ -67,7 +67,7 @@ class GauganRepository @Inject constructor(
                     if (bitmap != null) {
                         ld.postValue(Resource.success(bitmap))
                     } else {
-                        ld.postValue(Resource.error("Failed to generate image. \nERROR : Unable to decode bitmap"))
+                        ld.postValue(Resource.error("Failed to generate image, Please try again. \nERROR : Unable to decode bitmap"))
                     }
 
 

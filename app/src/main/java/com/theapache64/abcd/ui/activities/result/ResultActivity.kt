@@ -18,10 +18,14 @@ import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
+import com.theapache64.abcd.ui.activities.draw.DrawActivity
+import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
 import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.FileUtils
+import com.theapache64.abcd.utils.extensions.checkFilePermission
+import com.theapache64.abcd.utils.extensions.showErrorDialog
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -108,6 +112,45 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
             }
         })
 
+        // Get map submission request
+        viewModel.getSubmitMapResponse().observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    ivGauganOutput.visibility = View.GONE
+                    lvReceiveImage.showLoading(R.string.message_resubmit_map)
+                }
+                Resource.Status.SUCCESS -> {
+                    lvReceiveImage.hideLoading()
+
+                    if (it.data?.isSuccess!!) {
+
+                        // success
+
+                        if (it.data!!.isSuccess) {
+
+                            // Analytics
+                            AnalyticsHelper.pollMapSubmission()
+
+                            // map uploaded again
+                            viewModel.isErrorOnGen = false
+                            viewModel.load(imageRequest)
+                        } else {
+                            // unknown error
+                            lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
+                        }
+                    } else {
+                        // map submission failed
+                        lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
+                    }
+                }
+
+                Resource.Status.ERROR -> {
+                    ivGauganOutput.visibility = View.GONE
+                    lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
+                }
+            }
+        })
+
         // Get bitmap
         viewModel.getGauganOutput().observe(this, Observer { bitmap ->
 
@@ -118,27 +161,36 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                     lvReceiveImage.showLoading(R.string.message_loading_image)
                 }
                 Resource.Status.SUCCESS -> {
+
                     ivGauganOutput.visibility = View.VISIBLE
                     lvReceiveImage.hideLoading()
 
-                    bitmap.data?.let { outputBitmap ->
+                    bitmap.data.let { outputBitmap ->
 
-                        // Analytics
-                        AnalyticsHelper.pollStyleSubmission()
+                        if (outputBitmap != null) {
 
-                        ivGauganOutput.setImageBitmap(outputBitmap)
+                            // Analytics
+                            AnalyticsHelper.pollStyleSubmission()
 
-                        // Saving bitmap as file
-                        val outputFile = FileUtils.saveBitmap(
-                            this,
-                            "output_${viewModel.mapFile.nameWithoutExtension}",
-                            outputBitmap
-                        )
-                        viewModel.outputFile = outputFile
+                            ivGauganOutput.setImageBitmap(outputBitmap)
+
+                            // Saving bitmap as file
+                            val outputFile = FileUtils.saveBitmap(
+                                this,
+                                "output_${viewModel.mapFile.nameWithoutExtension}",
+                                outputBitmap
+                            )
+                            viewModel.outputFile = outputFile
+                        } else {
+                            viewModel.isErrorOnGen = true
+                            ivGauganOutput.visibility = View.GONE
+                            lvReceiveImage.showError(bitmap.message!!)
+                        }
                     }
                 }
 
                 Resource.Status.ERROR -> {
+                    viewModel.isErrorOnGen = true
                     ivGauganOutput.visibility = View.GONE
                     lvReceiveImage.showError(bitmap.message!!)
                 }
