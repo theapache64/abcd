@@ -15,7 +15,7 @@ import retrofit2.http.Query
  */
 interface ApiInterface {
 
-    @POST("gaugan_submit_map")
+    @POST("nvidia_gaugan_submit_map")
     fun submitMap(
         @Query("imageBase64") imageBase64: String,
         @Query("name") name: String

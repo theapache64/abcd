@@ -43,7 +43,7 @@ class GauganRepository @Inject constructor(
             .build()
 
         // Building server url
-        val url = "http://${server.ip}:443/gaugan_receive_image"
+        val url = "http://${server.ip}:443/nvidia_gaugan_receive_image"
 
         // Building request
         val imageRequest = Request.Builder()
