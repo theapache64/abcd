@@ -35,7 +35,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
         // Dagger
         DaggerAppComponent.builder()
             .appModule(AppModule(this))
-            .baseNetworkModule(BaseNetworkModule("https://api.sheety.co/"))
+            .baseNetworkModule(BaseNetworkModule("https://theapache64.com/abcd/"))
             .build()
             .inject(this)
 
