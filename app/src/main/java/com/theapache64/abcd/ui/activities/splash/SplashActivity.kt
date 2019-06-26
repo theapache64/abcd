@@ -56,7 +56,7 @@ class SplashActivity : BaseAppCompatActivity() {
         })
 
         // Watching for version info
-        viewModel.getLatestVersionInfo().observe(this, Observer {
+        viewModel.getPublicPref().observe(this, Observer {
             when (it.status) {
 
                 Resource.Status.LOADING -> {
@@ -64,24 +64,26 @@ class SplashActivity : BaseAppCompatActivity() {
                 }
 
                 Resource.Status.SUCCESS -> {
-                    // Checking version info
-                    val latestVersionInfo = it.data?.first()
-                    if (latestVersionInfo != null) {
-                        if (BuildConfig.VERSION_CODE < latestVersionInfo.latestVersionCode) {
-                            // old version
-                            binding.clpbSplash.hide()
-                            showUpdateDialog(latestVersionInfo.versionExpiryMessage)
 
+                    binding.clpbSplash.hide()
+
+                    // Checking version info
+                    it.data!!.data!!.prefs.apply {
+                        // down check
+                        if (isDown) {
+                            showDownDialog(downReason)
                         } else {
-                            // up to date version
-                            viewModel.goToNextScreen()
-                        }
-                    } else {
-                        binding.clpbSplash.hide()
-                        showErrorDialog(getString(R.string.error_version_data)) {
-                            finish()
+                            //version check
+                            if (BuildConfig.VERSION_CODE < latestVersionCode) {
+                                // old version
+                                showUpdateDialog(latestVersionMessage)
+                            } else {
+                                // up to date version
+                                viewModel.goToNextScreen()
+                            }
                         }
                     }
+
                 }
 
                 Resource.Status.ERROR -> {
@@ -95,9 +97,21 @@ class SplashActivity : BaseAppCompatActivity() {
 
         // Starting splash timer
         Handler().postDelayed({
-            viewModel.checkVersion()
+            viewModel.loadPublicPrefs()
         }, SPLASH_DURATION)
 
+    }
+
+    private fun showDownDialog(downReason: String) {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.dialog_title_maintenance)
+            .setMessage(downReason)
+            .setCancelable(false)
+            .setPositiveButton(android.R.string.ok) { _, _ ->
+                finish()
+            }
+            .create()
+            .show()
     }
 
     private fun showUpdateDialog(versionExpiryMessage: String) {

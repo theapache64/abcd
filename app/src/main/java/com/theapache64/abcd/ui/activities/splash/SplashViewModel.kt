@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.theapache64.abcd.data.remote.versioninfo.VersionInfoRequest
+import com.theapache64.abcd.data.remote.getpubprefs.GetPublicPreferencesRequest
 import com.theapache64.abcd.data.repositories.AppRepository
 import com.theapache64.abcd.ui.activities.draw.DrawActivity
 import com.theapache64.twinkill.utils.livedata.SingleLiveEvent
@@ -14,13 +14,13 @@ class SplashViewModel @Inject constructor(
     private val appRepository: AppRepository
 ) : ViewModel() {
 
-    private val versionInfoRequest = MutableLiveData<VersionInfoRequest>()
+    private val publicPrefRequest = MutableLiveData<GetPublicPreferencesRequest>()
 
-    private val latestVersionInfo = Transformations.switchMap(versionInfoRequest) {
-        appRepository.getLatestVersionDetails()
+    private val publicPrefResponse = Transformations.switchMap(publicPrefRequest) {
+        appRepository.getPublicPreferences()
     }
 
-    fun getLatestVersionInfo() = latestVersionInfo
+    fun getPublicPref() = publicPrefResponse
 
     private val launchActivityEvent = SingleLiveEvent<Int>()
 
@@ -36,8 +36,8 @@ class SplashViewModel @Inject constructor(
         launchActivityEvent.notifyFinished(activityId)
     }
 
-    fun checkVersion() {
-        this.versionInfoRequest.value = VersionInfoRequest()
+    fun loadPublicPrefs() {
+        this.publicPrefRequest.value = GetPublicPreferencesRequest()
     }
 
     companion object {

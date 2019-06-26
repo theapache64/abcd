@@ -1,10 +1,10 @@
 package com.theapache64.abcd.data.repositories
 
-import com.theapache64.abcd.data.remote.SheetyApiInterface
+import com.theapache64.abcd.data.remote.ApiInterface
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(
-    private val sheetyApiInterface: SheetyApiInterface
+    private val apiInterface: ApiInterface
 ) {
-    fun getLatestVersionDetails() = sheetyApiInterface.getVersionInfo()
+    fun getPublicPreferences() = apiInterface.getPublicPreferences()
 }

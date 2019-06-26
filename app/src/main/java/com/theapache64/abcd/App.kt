@@ -4,7 +4,6 @@ package com.theapache64.abcd
 import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.multidex.MultiDexApplication
-import com.theah64.safemail.SafeMail
 import com.theapache64.abcd.di.components.DaggerAppComponent
 import com.theapache64.abcd.di.modules.AppModule
 import com.theapache64.twinkill.TwinKill
@@ -44,13 +43,11 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
             TwinKill
                 .builder()
                 .addOkHttpInterceptor(CurlInterceptor())
-                .setNeedDeepCheckOnNetworkResponse(false)
+                .setNeedDeepCheckOnNetworkResponse(true)
                 .setDefaultFont(GoogleFonts.GoogleSansRegular)
                 .build()
 
         )
-
-        SafeMail.init("7r4Zbpdopp")
     }
 
 }

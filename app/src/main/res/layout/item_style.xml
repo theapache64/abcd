@@ -22,8 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/grey_900_trans"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/grey_900_trans">
 
 
             <!--Image-->
@@ -32,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{style.imageUrl}"
+                android:src="@{style.image}"
                 app:layout_constraintBottom_toTopOf="@id/tv_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

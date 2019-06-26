@@ -1,13 +1,11 @@
 package com.theapache64.abcd.data.remote
 
 import androidx.lifecycle.LiveData
+import com.theapache64.abcd.data.remote.getpubprefs.GetPublicPreferencesResponse
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapResponse
 import com.theapache64.abcd.data.remote.updaterandom.UpdateRandomResponse
 import com.theapache64.twinkill.network.utils.Resource
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 /**
@@ -27,6 +25,10 @@ interface ApiInterface {
     fun updateRandom(
         @Field("name") name: String
     ): LiveData<Resource<UpdateRandomResponse>>
+
+
+    @GET("get_public_preferences")
+    fun getPublicPreferences(): LiveData<Resource<GetPublicPreferencesResponse>>
 
 }
 

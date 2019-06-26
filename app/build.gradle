@@ -89,9 +89,6 @@ dependencies {
     // MultiDex support
     implementation 'com.android.support:multidex:1.0.3'
 
-    // SafeMail
-    implementation 'com.theah64.safemail:safemail:1.0.1'
-
     // Device names
     implementation 'com.jaredrummler:android-device-names:1.1.9'
 
