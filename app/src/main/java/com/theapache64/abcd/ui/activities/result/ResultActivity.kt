@@ -18,14 +18,9 @@ import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
-import com.theapache64.abcd.ui.activities.draw.DrawActivity
-import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
-import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.FileUtils
-import com.theapache64.abcd.utils.extensions.checkFilePermission
-import com.theapache64.abcd.utils.extensions.showErrorDialog
 import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
@@ -122,26 +117,9 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                 Resource.Status.SUCCESS -> {
                     lvReceiveImage.hideLoading()
 
-                    if (it.data?.isSuccess!!) {
-
-                        // success
-
-                        if (it.data!!.isSuccess) {
-
-                            // Analytics
-                            AnalyticsHelper.pollMapSubmission()
-
-                            // map uploaded again
-                            viewModel.isErrorOnGen = false
-                            viewModel.load(imageRequest)
-                        } else {
-                            // unknown error
-                            lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
-                        }
-                    } else {
-                        // map submission failed
-                        lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
-                    }
+                    // map uploaded again
+                    viewModel.isErrorOnGen = false
+                    viewModel.load(imageRequest)
                 }
 
                 Resource.Status.ERROR -> {
@@ -168,9 +146,6 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                     bitmap.data.let { outputBitmap ->
 
                         if (outputBitmap != null) {
-
-                            // Analytics
-                            AnalyticsHelper.pollStyleSubmission()
 
                             ivGauganOutput.setImageBitmap(outputBitmap)
 
@@ -231,7 +206,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
     }
 
     private fun updateSubtitle(style: Style, artStyle: Style?) {
-        val subTitle = if (artStyle == null || artStyle.code == StyleRepository.CODE_NONE) {
+        val subTitle = if (artStyle == null || artStyle.apiCode == StyleRepository.CODE_NONE) {
             style.name
         } else {
             "${style.name} + ${artStyle.name}"
@@ -290,8 +265,6 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
     override fun performShare(file: File) {
 
-        // Analytics
-        AnalyticsHelper.pollShareSubmission()
 
         val photoURI = FileProvider.getUriForFile(
             this,

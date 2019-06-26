@@ -11,17 +11,16 @@ import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.data.remote.updaterandom.UpdateRandomRequest
-import com.theapache64.abcd.data.repositories.GauganRepository
+import com.theapache64.abcd.data.repositories.ApiRepository
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.models.Style
-import com.theapache64.abcd.ui.activities.draw.DrawActivity
 import com.theapache64.twinkill.network.utils.Resource
 import java.io.ByteArrayOutputStream
 import java.io.File
 import javax.inject.Inject
 
 class ResultViewModel @Inject constructor(
-    private val gauganRepository: GauganRepository
+    private val apiRepository: ApiRepository
 ) : ViewModel() {
 
     var isErrorOnGen: Boolean = false
@@ -33,13 +32,13 @@ class ResultViewModel @Inject constructor(
 
     private val updateRandomRequest = MutableLiveData<UpdateRandomRequest>()
     private val updateRandomResponse = Transformations.switchMap(updateRandomRequest) {
-        gauganRepository.updateRandom(it)
+        apiRepository.updateRandom(it)
     }
 
     private val receiveImageRequest = MutableLiveData<ReceiveImageRequest>()
 
     fun getGauganOutput(): LiveData<Resource<Bitmap>> = Transformations.switchMap(receiveImageRequest) { request ->
-        gauganRepository.receiveImage(request)
+        apiRepository.receiveImage(request)
     }
 
     fun load(request: ReceiveImageRequest) {
@@ -59,7 +58,7 @@ class ResultViewModel @Inject constructor(
             )
 
         } else {
-            if (style.code == StyleRepository.CODE_RANDOM) {
+            if (style.apiCode == StyleRepository.CODE_RANDOM) {
                 // random
                 this.updateRandomRequest.value = UpdateRandomRequest(request.mapFile.nameWithoutExtension)
             } else {
@@ -89,7 +88,7 @@ class ResultViewModel @Inject constructor(
     private val submitMapRequest = MutableLiveData<SubmitMapRequest>()
 
     private val submitMapResponse = Transformations.switchMap(submitMapRequest) {
-        gauganRepository.submitMap(it)
+        apiRepository.submitMap(it)
     }
 
 

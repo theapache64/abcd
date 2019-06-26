@@ -26,6 +26,7 @@ fun Activity.showErrorDialog(message: String, onOk: (() -> Unit)? = null) {
     AlertDialog.Builder(this)
         .setTitle(R.string.title_error)
         .setMessage(message)
+        .setCancelable(onOk == null)
         .setPositiveButton(android.R.string.ok, okCallback)
         .create()
         .show()

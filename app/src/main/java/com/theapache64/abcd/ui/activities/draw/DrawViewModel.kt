@@ -7,13 +7,13 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.data.repositories.BrushRepository
-import com.theapache64.abcd.data.repositories.GauganRepository
+import com.theapache64.abcd.data.repositories.ApiRepository
 import com.theapache64.abcd.models.Brush
 import javax.inject.Inject
 
 class DrawViewModel @Inject constructor(
     private val brushesRepository: BrushRepository,
-    private val gauganRepository: GauganRepository
+    private val apiRepository: ApiRepository
 ) : ViewModel() {
 
     lateinit var mountain: Brush
@@ -24,7 +24,7 @@ class DrawViewModel @Inject constructor(
     private val submitMapRequest = MutableLiveData<SubmitMapRequest>()
 
     private val submitMapResponse = Transformations.switchMap(submitMapRequest) {
-        gauganRepository.submitMap(it)
+        apiRepository.submitMap(it)
     }
 
     fun getSubmitMapResponse() = submitMapResponse

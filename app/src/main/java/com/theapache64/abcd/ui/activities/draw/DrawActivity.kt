@@ -27,7 +27,6 @@ import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
-import com.theapache64.abcd.utils.AnalyticsHelper
 import com.theapache64.abcd.utils.BrushUtils
 import com.theapache64.abcd.utils.FileUtils
 import com.theapache64.abcd.utils.extensions.checkFilePermission
@@ -95,29 +94,17 @@ class DrawActivity : BaseAppCompatActivity(),
 
                     lvSubmitMap.hideLoading()
 
-                    // Analytics
-                    AnalyticsHelper.pollMapSubmission()
+                    // checking file permission to save bitmap as file
+                    checkFilePermission {
 
-                    if (it.data!!.isSuccess) {
+                        // permission granted, save bitmap
+                        saveBitmap { mapFile ->
 
-                        // checking file permission to save bitmap as file
-                        checkFilePermission {
-
-                            // permission granted, save bitmap
-                            saveBitmap { mapFile ->
-
-                                // map saved, now launch styles
-                                startActivity(
-                                    StylesActivity.getStartIntent(this, mapFile)
-                                )
-                            }
+                            // map saved, now launch styles
+                            startActivity(
+                                StylesActivity.getStartIntent(this, mapFile)
+                            )
                         }
-
-                    } else {
-                        // unknown error
-                        showErrorDialog(
-                            getString(R.string.error_uploading_failed_seg_map_server_error)
-                        )
                     }
 
                 }
@@ -165,7 +152,6 @@ class DrawActivity : BaseAppCompatActivity(),
 
 
     }
-
 
 
     private fun saveBitmap(onBitmapSaved: (mapFile: File) -> Unit) {

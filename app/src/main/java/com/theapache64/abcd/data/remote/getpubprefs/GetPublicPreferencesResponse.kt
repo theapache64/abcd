@@ -15,10 +15,12 @@ class GetPublicPreferencesResponse(error: Boolean, message: String, data: Data?)
         @Json(name = "down_reason")
         val downReason: String, // We are under maintenance
         @Json(name = "is_down")
-        val isDown: Boolean, // false
+        private val _isDown: String, // false
         @Json(name = "latest_version_code")
         val latestVersionCode: Int, // 5
         @Json(name = "latest_version_message")
         val latestVersionMessage: String // New version available. Please update
-    )
+    ) {
+        val isDown = _isDown.toBoolean()
+    }
 }

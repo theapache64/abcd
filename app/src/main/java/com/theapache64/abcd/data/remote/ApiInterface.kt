@@ -13,16 +13,19 @@ import retrofit2.http.*
  */
 interface ApiInterface {
 
+    @FormUrlEncoded
     @POST("submit_map")
     fun submitMap(
-        @Query("imageBase64") imageBase64: String,
-        @Query("name") name: String
+        @Field("source") source: String,
+        @Field("image_base64") imageBase64: String,
+        @Field("name") name: String
     ): LiveData<Resource<SubmitMapResponse>>
 
 
     @FormUrlEncoded
     @POST("update_random")
     fun updateRandom(
+        @Field("source") source: String,
         @Field("name") name: String
     ): LiveData<Resource<UpdateRandomResponse>>
 
