@@ -37,7 +37,7 @@ class ResultViewModel @Inject constructor(
 
     private val receiveImageRequest = MutableLiveData<ReceiveImageRequest>()
 
-    fun getGauganOutput(): LiveData<Resource<Bitmap>> = Transformations.switchMap(receiveImageRequest) { request ->
+    fun getFinalImageOutput(): LiveData<Resource<Bitmap>> = Transformations.switchMap(receiveImageRequest) { request ->
         apiRepository.receiveImage(request)
     }
 

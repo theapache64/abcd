@@ -23,7 +23,7 @@ class ApiRepository @Inject constructor(
 ) {
 
     /**
-     * Submits the map to gaugan server
+     * Submits the map to server
      */
     fun submitMap(submitMapRequest: SubmitMapRequest) = apiInterface.submitMap(
         DeviceName.getDeviceName(),
@@ -32,7 +32,7 @@ class ApiRepository @Inject constructor(
     )
 
     /**
-     * To receive image from gaugan
+     * To receive image
      */
     fun receiveImage(request: ReceiveImageRequest): LiveData<Resource<Bitmap>> {
 

@@ -32,7 +32,7 @@ class ShareViewModel @Inject constructor(application: Application) : AndroidView
     }
 
     fun shareMapAndOutput() {
-        val joinedBitmap = BitmapUtils.join(mapFile, outputFile, "GauGAN + abcd")
+        val joinedBitmap = BitmapUtils.join(mapFile, outputFile, "Drawn using abcd")
         val bitmapFile = FileUtils.saveBitmap(
             getApplication(),
             "map_and_output_${mapFile.nameWithoutExtension}",

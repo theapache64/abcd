@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityStylesBinding
-import com.theapache64.abcd.models.Style
 import com.theapache64.abcd.ui.activities.result.ResultActivity
 import com.theapache64.abcd.ui.adapters.StylesAdapter
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity

@@ -734,7 +734,7 @@ class SpadeCanvas : View {
 
 
     /**
-     * Draws gaugan sky and sea
+     * Draws sky and sea
      */
     fun drawSkyAndSea(
         seaColor: Int,

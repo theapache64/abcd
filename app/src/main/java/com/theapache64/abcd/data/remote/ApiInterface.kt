@@ -5,7 +5,10 @@ import com.theapache64.abcd.data.remote.getpubprefs.GetPublicPreferencesResponse
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapResponse
 import com.theapache64.abcd.data.remote.updaterandom.UpdateRandomResponse
 import com.theapache64.twinkill.network.utils.Resource
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 
 /**

@@ -30,7 +30,7 @@ class StyleRepository @Inject constructor(
     )
 
     val artStyles = listOf(
-        Style("None", R.drawable.style_random, CODE_NONE),
+        Style("None", R.drawable.none, CODE_NONE),
         Style("Candy", R.drawable.art_candy, "candy"),
         Style("Mosaic", R.drawable.art_mosaic, "mosaic"),
         Style("Rain Princess", R.drawable.art_rain_princess_cropped, "rain"),

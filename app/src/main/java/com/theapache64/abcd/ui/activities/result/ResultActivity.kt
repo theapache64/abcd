@@ -85,23 +85,23 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         })
 
 
-        val ivGauganOutput = binding.iContentResult.ivGauganOutput
+        val ivOutput = binding.iContentResult.ivOutput
 
         // Get random image request
         viewModel.getUpdateRandomResponse().observe(this, Observer { updateRequest ->
             when (updateRequest.status) {
                 Resource.Status.LOADING -> {
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showLoading(R.string.message_generating_with_random)
                 }
                 Resource.Status.SUCCESS -> {
-                    ivGauganOutput.visibility = View.VISIBLE
+                    ivOutput.visibility = View.VISIBLE
                     lvReceiveImage.hideLoading()
 
                     viewModel.loadDirectOutput(imageRequest)
                 }
                 Resource.Status.ERROR -> {
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showError(updateRequest.message!!)
                 }
             }
@@ -111,7 +111,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         viewModel.getSubmitMapResponse().observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showLoading(R.string.message_resubmit_map)
                 }
                 Resource.Status.SUCCESS -> {
@@ -123,31 +123,31 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                 }
 
                 Resource.Status.ERROR -> {
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
                 }
             }
         })
 
         // Get bitmap
-        viewModel.getGauganOutput().observe(this, Observer { bitmap ->
+        viewModel.getFinalImageOutput().observe(this, Observer { bitmap ->
 
             when (bitmap.status) {
 
                 Resource.Status.LOADING -> {
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showLoading(R.string.message_loading_image)
                 }
                 Resource.Status.SUCCESS -> {
 
-                    ivGauganOutput.visibility = View.VISIBLE
+                    ivOutput.visibility = View.VISIBLE
                     lvReceiveImage.hideLoading()
 
                     bitmap.data.let { outputBitmap ->
 
                         if (outputBitmap != null) {
 
-                            ivGauganOutput.setImageBitmap(outputBitmap)
+                            ivOutput.setImageBitmap(outputBitmap)
 
                             // Saving bitmap as file
                             val outputFile = FileUtils.saveBitmap(
@@ -158,7 +158,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                             viewModel.outputFile = outputFile
                         } else {
                             viewModel.isErrorOnGen = true
-                            ivGauganOutput.visibility = View.GONE
+                            ivOutput.visibility = View.GONE
                             lvReceiveImage.showError(bitmap.message!!)
                         }
                     }
@@ -166,7 +166,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
                 Resource.Status.ERROR -> {
                     viewModel.isErrorOnGen = true
-                    ivGauganOutput.visibility = View.GONE
+                    ivOutput.visibility = View.GONE
                     lvReceiveImage.showError(bitmap.message!!)
                 }
             }

@@ -27,7 +27,7 @@
 
             <!--Output-->
             <ImageView
-                android:id="@+id/iv_gaugan_output"
+                android:id="@+id/iv_output"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +38,7 @@
 
             <!--Input-->
             <ImageView
-                android:id="@+id/iv_gaugan_input"
+                android:id="@+id/iv_input"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="@{viewModel.isInputVisible ? View.VISIBLE : View.GONE}"

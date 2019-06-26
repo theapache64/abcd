@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
-import com.theapache64.abcd.data.repositories.BrushRepository
 import com.theapache64.abcd.data.repositories.ApiRepository
+import com.theapache64.abcd.data.repositories.BrushRepository
 import com.theapache64.abcd.models.Brush
 import javax.inject.Inject
 

@@ -1,7 +1,6 @@
 package com.theapache64.abcd.ui.activities.draw
 
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -14,12 +13,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.single.BasePermissionListener
-import com.karumi.dexter.listener.single.CompositePermissionListener
-import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
