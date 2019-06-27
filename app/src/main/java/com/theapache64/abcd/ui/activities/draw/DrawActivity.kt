@@ -142,8 +142,6 @@ class DrawActivity : BaseAppCompatActivity(),
 
         // Setting default canvas properties
         spadeCanvas.paintStrokeWidth = BrushUtils.getDefaultBrushSize()
-
-
     }
 
 
