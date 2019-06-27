@@ -686,11 +686,15 @@ class SpadeCanvas : View {
      *
      * @return This is returned as scaled bitmap.
      */
-    fun getScaleBitmap(w: Int, h: Int): Bitmap {
+    fun getScaleBitmap(w: Int, h: Int): Bitmap? {
         this.isDrawingCacheEnabled = false
         this.isDrawingCacheEnabled = true
 
-        return Bitmap.createScaledBitmap(this.drawingCache, w, h, true)
+        if (this.drawingCache != null) {
+            return Bitmap.createScaledBitmap(this.drawingCache, w, h, true)
+        }
+
+        return null
     }
 
     /**
@@ -726,10 +730,14 @@ class SpadeCanvas : View {
         return byteArrayOutputStream.toByteArray()
     }
 
-    fun getScaledBitmapByteArray(width: Int, height: Int): ByteArray {
+    fun getScaledBitmapByteArray(width: Int, height: Int): ByteArray? {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        this.getScaleBitmap(width, height).compress(CompressFormat.PNG, 100, byteArrayOutputStream)
-        return byteArrayOutputStream.toByteArray()
+        val scaleBitmap = this.getScaleBitmap(width, height)
+        if (scaleBitmap != null) {
+            scaleBitmap.compress(CompressFormat.PNG, 100, byteArrayOutputStream)
+            return byteArrayOutputStream.toByteArray()
+        }
+        return null
     }
 
 

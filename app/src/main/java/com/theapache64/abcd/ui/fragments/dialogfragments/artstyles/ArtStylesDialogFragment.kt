@@ -77,8 +77,8 @@ class ArtStylesDialogFragment : BaseDialogFragment(), ArtStylesHandler {
         return binding.root
     }
 
-    private fun onArtStyleClicked(style: Style) {
-        callback.onArtStyleSelected(style)
+    private fun onArtStyleClicked(artStyle: Style) {
+        callback.onArtStyleSelected(artStyle)
         dismiss()
     }
 

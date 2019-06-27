@@ -149,14 +149,17 @@ class DrawActivity : BaseAppCompatActivity(),
 
     private fun saveBitmap(onBitmapSaved: (mapFile: File) -> Unit) {
 
-        val mapFile =
-            FileUtils.saveBitmap(
-                this,
-                viewModel.submittedMapName,
-                spadeCanvas.getScaleBitmap(SCALE_WIDTH, SCALE_HEIGHT)
-            )
+        spadeCanvas.getScaleBitmap(SCALE_WIDTH, SCALE_HEIGHT)?.let { scaledBitmap ->
+            val mapFile =
+                FileUtils.saveBitmap(
+                    this,
+                    viewModel.submittedMapName,
+                    scaledBitmap
+                )
 
-        onBitmapSaved(mapFile)
+            onBitmapSaved(mapFile)
+        }
+
     }
 
 
