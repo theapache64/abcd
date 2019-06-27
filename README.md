@@ -17,7 +17,7 @@ No description, just watch it from action.
 - The product was listed as #2 product of the day on 25th June 2019.
 - [Ryan Hoover](https://twitter.com/rrhoover) up voted the project
 - [Ming-Yu Liu](https://twitter.com/liu_mingyu) shot a direct message on twitter
-- Created so many friends from the industry
+- Created somany friends from the industry
 
 
 ## Sad Part
@@ -32,7 +32,7 @@ No description, just watch it from action.
 
 ## Issues
 
-If you are happened to face any bugs, feel free to rise an issue [here](https://github.com/theapache64/abcd/issues/new)
+If you are happen to face any bugs, feel free to rise an issue [here](https://github.com/theapache64/abcd/issues/new)
 
 ## Contribution
 
