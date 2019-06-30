@@ -120,7 +120,7 @@ class SplashActivity : BaseAppCompatActivity() {
             .setMessage(versionExpiryMessage)
             .setCancelable(false)
             .setNegativeButton(android.R.string.cancel) { _, _ ->
-                finish()pla
+                finish()
             }
             .setPositiveButton(R.string.action_update) { _, _ ->
                 // go to release page
