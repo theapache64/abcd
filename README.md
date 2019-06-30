@@ -4,6 +4,8 @@
 
 Anybody can draw
 
+<img src="https://raw.githubusercontent.com/theapache64/abcd/master/abcd_demo.gif" width="300">
+
 ## Download
 
 You can download latest version from [here](https://github.com/theapache64/abcd/releases)
