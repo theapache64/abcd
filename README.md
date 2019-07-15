@@ -48,6 +48,13 @@ The project follows MVVM architecture, and powered by
 If you've basic knowledge in above stack, feel free to create PR to anything (features/bug fixes/anything)
 
 
+### TODO
+
+- Gallery
+- Upload to Gallery
+- Like post
+ 
+
 ### Author
 
 theapache64
