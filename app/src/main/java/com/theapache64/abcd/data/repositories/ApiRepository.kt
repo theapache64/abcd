@@ -68,12 +68,12 @@ class ApiRepository @Inject constructor(
             override fun onResponse(call: Call, response: Response) {
                 try {
 
-                    val byteStream = response.body()!!.byteStream()
+                    val byteStream = response.body!!.byteStream()
                     val bitmap = BitmapFactory.decodeStream(byteStream)
                     if (bitmap != null) {
                         ld.postValue(Resource.success(bitmap))
                     } else {
-                        val jsonString = response.body()!!.string()
+                        val jsonString = response.body!!.string()
                         val adapter = moshi.adapter(ReceiveImageResponse::class.java)
                         val resp = adapter.fromJson(jsonString)
                         ld.postValue(Resource.error("Failed to generate image, Please try again. \nERROR : ${resp?.message}"))

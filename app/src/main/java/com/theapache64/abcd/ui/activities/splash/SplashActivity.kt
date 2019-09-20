@@ -44,6 +44,7 @@ class SplashActivity : BaseAppCompatActivity() {
         viewModel.getLaunchActivityEvent().observe(this, Observer { activityId ->
 
             when (activityId) {
+
                 DrawActivity.ID -> {
                     startActivity(DrawActivity.getStartIntent(this))
                 }
@@ -70,7 +71,7 @@ class SplashActivity : BaseAppCompatActivity() {
                     // Checking version info
                     it.data!!.data!!.prefs.apply {
                         // down check
-                        if (isDown) {
+                        if (isDown && !BuildConfig.DEBUG) {
                             showDownDialog(downReason)
                         } else {
                             //version check

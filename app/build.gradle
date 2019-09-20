@@ -62,9 +62,9 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.0'
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
 
     // Moshi
     implementation 'com.squareup.moshi:moshi:1.8.0'
@@ -74,11 +74,11 @@ dependencies {
     implementation 'com.theah64.materialcolors:materialcolors:1.0.0'
 
     // TwinKill
-    def twinkill_version = '0.0.1-alpha05'
+    def twinkill_version = '1.0.0-alpha02'
     implementation "com.theapache64.twinkill:core:$twinkill_version"
     implementation "com.theapache64.twinkill:logger:$twinkill_version"
     implementation "com.theapache64.twinkill:network:$twinkill_version"
-    implementation "com.theapache64.twinkill:google_fonts:0.0.1-alpha01"
+    implementation "com.theapache64.twinkill:google_sans:$twinkill_version"
 
     // Dexter
     implementation 'com.karumi:dexter:5.0.0'

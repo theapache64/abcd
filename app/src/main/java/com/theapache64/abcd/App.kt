@@ -7,7 +7,7 @@ import androidx.multidex.MultiDexApplication
 import com.theapache64.abcd.di.components.DaggerAppComponent
 import com.theapache64.abcd.di.modules.AppModule
 import com.theapache64.twinkill.TwinKill
-import com.theapache64.twinkill.googlefonts.GoogleFonts
+import com.theapache64.twinkill.googlesans.GoogleSans
 import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
 import com.theapache64.twinkill.network.utils.retrofit.interceptors.CurlInterceptor
 import dagger.android.AndroidInjector
@@ -44,7 +44,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
                 .builder()
                 .addOkHttpInterceptor(CurlInterceptor())
                 .setNeedDeepCheckOnNetworkResponse(true)
-                .setDefaultFont(GoogleFonts.GoogleSansRegular)
+                .setDefaultFont(GoogleSans.Regular)
                 .build()
 
         )

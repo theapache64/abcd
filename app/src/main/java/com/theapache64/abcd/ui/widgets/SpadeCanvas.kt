@@ -82,7 +82,7 @@ class SpadeCanvas : View {
      *
      * @param style
      */
-    var paintStyle: Paint.Style = Paint.Style.STROKE
+    private var paintStyle: Paint.Style = Paint.Style.STROKE
     /**
      * This method is getter for stroke color.
      *
@@ -262,7 +262,11 @@ class SpadeCanvas : View {
      * @param attrs
      * @param defStyle
      */
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
+        context,
+        attrs,
+        defStyle
+    ) {
         this.setup(context)
     }
 
@@ -308,11 +312,8 @@ class SpadeCanvas : View {
     private fun createPaint(): Paint {
         val paint = Paint()
 
-        paint.isAntiAlias = true
         paint.style = this.paintStyle
         paint.strokeWidth = this.paintStrokeWidth
-        paint.strokeCap = this.lineCap
-        paint.strokeJoin = Paint.Join.MITER  // fixed
 
         // for Text
         if (this.mode == Mode.TEXT) {
@@ -502,10 +503,16 @@ class SpadeCanvas : View {
                         Drawer.CIRCLE -> {
                             val distanceX = Math.abs((this.startX - x).toDouble())
                             val distanceY = Math.abs((this.startX - y).toDouble())
-                            val radius = Math.sqrt(Math.pow(distanceX, 2.0) + Math.pow(distanceY, 2.0))
+                            val radius =
+                                Math.sqrt(Math.pow(distanceX, 2.0) + Math.pow(distanceY, 2.0))
 
                             path.reset()
-                            path.addCircle(this.startX, this.startY, radius.toFloat(), Path.Direction.CCW)
+                            path.addCircle(
+                                this.startX,
+                                this.startY,
+                                radius.toFloat(),
+                                Path.Direction.CCW
+                            )
                         }
                         Drawer.ELLIPSE -> {
                             val rect = RectF(this.startX, this.startY, x, y)
@@ -723,7 +730,7 @@ class SpadeCanvas : View {
      * @param quality
      * @return This is returned as byte array of bitmap.
      */
-    fun getBitmapAsByteArray(format: CompressFormat, quality: Int): ByteArray {
+    private fun getBitmapAsByteArray(format: CompressFormat, quality: Int): ByteArray {
         val byteArrayOutputStream = ByteArrayOutputStream()
         this.getBitmap().compress(format, quality, byteArrayOutputStream)
 

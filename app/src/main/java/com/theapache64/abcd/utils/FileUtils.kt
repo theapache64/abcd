@@ -9,7 +9,8 @@ import java.io.FileOutputStream
 object FileUtils {
 
     fun saveBitmap(context: Context, fileName: String, bitmap: Bitmap): File {
-        val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "$fileName.png")
+        val file =
+            File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "$fileName.png")
         if (!file.parentFile.exists()) {
             file.parentFile.mkdirs()
         }

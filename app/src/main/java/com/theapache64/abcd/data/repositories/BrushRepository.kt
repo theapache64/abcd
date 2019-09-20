@@ -17,7 +17,7 @@ class BrushRepository @Inject constructor() {
         Brush(KEY_SKY, "#9ceedd"),
         Brush("Tree", "#a8c832"),
         Brush("Cloud", "#696969"),
-        Brush(KEY_MOUNTAIN, "#869664"),
+        Brush(KEY_MOUNTAIN, "#869568"),
         Brush("Grass", "#7bc800"),
         Brush(KEY_SEA, "#9ac6da"),
         Brush("River", "#9364c8"),

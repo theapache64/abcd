@@ -33,7 +33,7 @@ class SplashViewModel @Inject constructor(
         val activityId = DrawActivity.ID
 
         // passing id with the finish notification
-        launchActivityEvent.notifyFinished(activityId)
+        launchActivityEvent.value = activityId
     }
 
     fun loadPublicPrefs() {

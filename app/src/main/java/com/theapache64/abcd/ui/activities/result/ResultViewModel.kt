@@ -37,9 +37,10 @@ class ResultViewModel @Inject constructor(
 
     private val receiveImageRequest = MutableLiveData<ReceiveImageRequest>()
 
-    fun getFinalImageOutput(): LiveData<Resource<Bitmap>> = Transformations.switchMap(receiveImageRequest) { request ->
-        apiRepository.receiveImage(request)
-    }
+    fun getFinalImageOutput(): LiveData<Resource<Bitmap>> =
+        Transformations.switchMap(receiveImageRequest) { request ->
+            apiRepository.receiveImage(request)
+        }
 
     fun load(request: ReceiveImageRequest) {
         if (isErrorOnGen) {
@@ -60,7 +61,8 @@ class ResultViewModel @Inject constructor(
         } else {
             if (style.apiCode == StyleRepository.CODE_RANDOM) {
                 // random
-                this.updateRandomRequest.value = UpdateRandomRequest(request.mapFile.nameWithoutExtension)
+                this.updateRandomRequest.value =
+                    UpdateRandomRequest(request.mapFile.nameWithoutExtension)
             } else {
                 loadDirectOutput(request)
             }
