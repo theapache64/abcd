@@ -6,4 +6,8 @@ class BrushCategory(
     val name: String,
     @DrawableRes val image: Int,
     val brushes: List<Brush>
-)
+) {
+    override fun toString(): String {
+        return name
+    }
+}

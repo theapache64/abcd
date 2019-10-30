@@ -1,6 +1,7 @@
 package com.theapache64.abcd.di.modules
 
 import android.app.Application
+import com.theapache64.twinkill.di.modules.PreferenceModule
 
 import dagger.Module
 import dagger.Provides
@@ -11,6 +12,7 @@ import dagger.android.support.AndroidSupportInjectionModule
         AndroidSupportInjectionModule::class,
         NetworkModule::class,
         ViewModelModule::class,
+        PreferenceModule::class,
         ActivitiesBuilderModule::class,
         FragmentsBuilderModule::class
     ]

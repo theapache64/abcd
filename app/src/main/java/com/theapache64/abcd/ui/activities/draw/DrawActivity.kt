@@ -142,6 +142,8 @@ class DrawActivity : BaseAppCompatActivity(),
 
         // Setting default canvas properties
         spadeCanvas.paintStrokeWidth = BrushUtils.getDefaultBrushSize()
+
+        showBrushesFragment()
     }
 
 
@@ -178,7 +180,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
             // Choose brush size
             R.id.action_change_brush_size -> {
-                showBrushChooser()
+                showBrushSizeChooser()
                 return true
             }
 
@@ -214,7 +216,7 @@ class DrawActivity : BaseAppCompatActivity(),
         )
     }
 
-    private fun showBrushChooser() {
+    private fun showBrushSizeChooser() {
         val brushSizeFragment = BrushSizeDialogFragment.newInstance(spadeCanvas.paintStrokeWidth)
         brushSizeFragment.show(supportFragmentManager, BrushSizeDialogFragment.TAG)
     }
@@ -237,7 +239,10 @@ class DrawActivity : BaseAppCompatActivity(),
 
         // Upload image
         val base64Image =
-            Base64.encodeToString(spadeCanvas.getScaledBitmapByteArray(SCALE_WIDTH, SCALE_HEIGHT), Base64.DEFAULT)
+            Base64.encodeToString(
+                spadeCanvas.getScaledBitmapByteArray(SCALE_WIDTH, SCALE_HEIGHT),
+                Base64.DEFAULT
+            )
         val name = "${System.nanoTime()}abcd${System.currentTimeMillis()}"
 
         viewModel.submitMap(name, base64Image)

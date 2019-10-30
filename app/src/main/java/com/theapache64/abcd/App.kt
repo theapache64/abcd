@@ -7,6 +7,7 @@ import androidx.multidex.MultiDexApplication
 import com.theapache64.abcd.di.components.DaggerAppComponent
 import com.theapache64.abcd.di.modules.AppModule
 import com.theapache64.twinkill.TwinKill
+import com.theapache64.twinkill.di.modules.ContextModule
 import com.theapache64.twinkill.googlesans.GoogleSans
 import com.theapache64.twinkill.network.di.modules.BaseNetworkModule
 import com.theapache64.twinkill.network.utils.retrofit.interceptors.CurlInterceptor
@@ -33,6 +34,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
 
         // Dagger
         DaggerAppComponent.builder()
+            .contextModule(ContextModule(this))
             .appModule(AppModule(this))
             .baseNetworkModule(BaseNetworkModule("http://theapache64.com/abcd/"))
             .build()

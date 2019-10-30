@@ -23,8 +23,8 @@
         <!--Color Circle-->
         <ImageView
             android:id="@+id/v_color_circle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/shape_circle"
             android:tint="@{Color.parseColor(brush.color)}"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="@{brush.name}"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/v_color_circle"
             app:layout_constraintStart_toEndOf="@id/v_color_circle"
             app:layout_constraintTop_toTopOf="@id/v_color_circle"
