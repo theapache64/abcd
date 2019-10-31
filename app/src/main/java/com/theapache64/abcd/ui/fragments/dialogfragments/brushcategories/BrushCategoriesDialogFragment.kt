@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.tabs.TabLayout
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.FragmentBrushCategoriesBinding
 import com.theapache64.abcd.models.Brush
@@ -24,7 +25,7 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  *
  */
-class BrushCategoriesDialogFragment private constructor() : BaseDialogFragment(),
+class BrushCategoriesDialogFragment : BaseDialogFragment(),
     BrushCategoriesHandler {
 
 
@@ -82,9 +83,28 @@ class BrushCategoriesDialogFragment private constructor() : BaseDialogFragment()
 
         // Watching for brush categories
         viewModel.getBrushCategories().observe(this, Observer { brushCategories ->
-            val adapter = BrushesPagerAdapter(childFragmentManager, brushCategories)
+            val adapter = BrushesPagerAdapter(childFragmentManager, brushCategories.second)
             binding.vpBrushes.adapter = adapter
+            binding.vpBrushes.currentItem = brushCategories.first
         })
+
+        binding.tlBrushCategories.addOnTabSelectedListener(object :
+            TabLayout.OnTabSelectedListener {
+
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                info("Tab selected : ${tab!!.position}")
+                viewModel.saveSelectedCategory(tab.position)
+            }
+
+        })
+
 
         return binding.root
     }

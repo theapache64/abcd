@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.repositories.BrushRepository
 import com.theapache64.abcd.data.repositories.SharedPrefRepository
-import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.models.BrushCategory
 import javax.inject.Inject
 
@@ -14,40 +13,29 @@ class BrushCategoriesViewModel @Inject constructor(
     private val prefRepo: SharedPrefRepository
 ) : ViewModel() {
 
-    private val brushes = MutableLiveData<List<Brush>>()
-    private val brushCategories = MutableLiveData<List<BrushCategory>>()
-    private val activeCategory = MutableLiveData<Pair<Int, BrushCategory>>()
+    private val brushCategories = MutableLiveData<Pair<Int, List<BrushCategory>>>()
 
     init {
         val brushCategories = brushesRepo.brushCategories
-        this.brushCategories.value = brushCategories
-        this.activeCategory.value = prefRepo.getLastSelectedCategoryName().let { catName ->
+        val activeCatPos = prefRepo.getLastSelectedCategoryName().let { catName ->
             if (catName == null) {
-                Pair(0, brushCategories.first())
+                0
             } else {
                 val cat = brushCategories.find { it.name == catName }!!
                 val catIndex = brushCategories.indexOf(cat)
-                Pair(catIndex, cat)
+                catIndex
             }
         }
+        this.brushCategories.value = Pair(
+            activeCatPos,
+            brushCategories
+        )
     }
 
-    fun getBrushes(): LiveData<List<Brush>> = brushes
-
-    fun onCategoryChanged(brushCategory: BrushCategory) {
-
-        this.brushes.value =
-            brushesRepo.brushCategories.find { it == brushCategory }!!.brushes
-
-        prefRepo.saveLastSelectedCategory(brushCategory.name)
+    fun getBrushCategories(): LiveData<Pair<Int, List<BrushCategory>>> = brushCategories
+    fun saveSelectedCategory(position: Int) {
+        val category = this.brushCategories.value!!.second[position]
+        prefRepo.saveLastSelectedCategory(category.name)
     }
 
-    fun getBrushCategories(): LiveData<List<BrushCategory>> = brushCategories
-    private var checkCount = 0
-    fun isManualSelection(): Boolean {
-        checkCount++
-        return checkCount > 1
-    }
-
-    fun getActiveCategory(): LiveData<Pair<Int, BrushCategory>> = activeCategory
 }
