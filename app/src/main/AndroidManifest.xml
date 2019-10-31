@@ -18,6 +18,11 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
 
+        <activity
+            android:name=".ui.activities.honor.HonorActivity"
+            android:label="@string/action_donate"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -36,11 +41,9 @@
         <activity
             android:name=".ui.activities.styles.StylesActivity"
             android:label="@string/title_activity_styles"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        </activity>
-
-        <!--Splash-->
+        <!-- Splash -->
         <activity
             android:name=".ui.activities.splash.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">

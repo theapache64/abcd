@@ -1,4 +1,5 @@
 package com.theapache64.abcd.di.modules
+import com.theapache64.abcd.ui.activities.honor.HonorActivity
 
 
 import com.theapache64.abcd.ui.activities.draw.DrawActivity
@@ -26,4 +27,7 @@ abstract class ActivitiesBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun getStylesActivity(): StylesActivity
+@ContributesAndroidInjector
+abstract fun getHonorActivity(): HonorActivity
+
 }

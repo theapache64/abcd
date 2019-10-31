@@ -1,0 +1,10 @@
+{
+  "name": "abcd",
+  "dir": "/home/theapache64/Documents/projects/abcd",
+  "packageName": "com.theapache64.abcd",
+  "architecture": 1,
+  "isNeedGoogleFontsModule": true,
+  "isNeedNetworkModule": true,
+  "isNeedSplashScreen": true,
+  "isNeedLogInScreen": false
+}

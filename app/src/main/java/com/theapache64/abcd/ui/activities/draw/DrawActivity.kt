@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
+import com.theapache64.abcd.ui.activities.honor.HonorActivity
 import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushcategories.BrushCategoriesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
@@ -142,6 +143,8 @@ class DrawActivity : BaseAppCompatActivity(),
 
         // Setting default canvas properties
         spadeCanvas.paintStrokeWidth = BrushUtils.getDefaultBrushSize()
+
+        startActivity(HonorActivity.getStartIntent(this))
     }
 
 

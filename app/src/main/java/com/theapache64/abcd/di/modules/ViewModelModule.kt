@@ -1,4 +1,5 @@
 package com.theapache64.abcd.di.modules
+import com.theapache64.abcd.ui.activities.honor.HonorViewModel
 
 import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.ui.activities.draw.DrawViewModel
@@ -60,5 +61,10 @@ abstract class ViewModelModule {
     @ViewModelKey(ShareViewModel::class)
     abstract fun bindShareViewModel(viewModel: ShareViewModel): ViewModel
 
+
+@Binds
+@IntoMap
+@ViewModelKey(HonorViewModel::class)
+abstract fun bindHonorViewModel(viewModel: HonorViewModel): ViewModel
 
 }

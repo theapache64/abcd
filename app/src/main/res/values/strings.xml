@@ -37,7 +37,10 @@
     <string name="action_new">New</string>
     <string name="dialog_title_confirm">Confirm</string>
     <string name="message_confirm_new">Are you sure you want to replace the current canvas with new one ?</string>
-    <string name="message_generating_with_random">Generating with random style...</string>
-    <string name="message_resubmit_map">Re-submitting segmentation map...</string>
+    <string name="message_generating_with_random">Generating with random style…</string>
+    <string name="message_resubmit_map">Re-submitting segmentation map…</string>
     <string name="dialog_title_maintenance">We\'re sorry</string>
+    <string name="action_donate">Donate</string>
+    <string name="title_activity_honor">HonorActivity</string>
+    <string name="label_the_honor_system">The Honor System</string>
 </resources>

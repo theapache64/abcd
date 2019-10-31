@@ -31,7 +31,8 @@ import dagger.android.AndroidInjection
 import java.io.File
 import javax.inject.Inject
 
-class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback, ShareDialogFragment.Callback {
+class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback,
+    ShareDialogFragment.Callback {
 
 
     companion object {
@@ -90,16 +91,19 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         // Get random image request
         viewModel.getUpdateRandomResponse().observe(this, Observer { updateRequest ->
             when (updateRequest.status) {
+
                 Resource.Status.LOADING -> {
                     ivOutput.visibility = View.GONE
                     lvReceiveImage.showLoading(R.string.message_generating_with_random)
                 }
+
                 Resource.Status.SUCCESS -> {
                     ivOutput.visibility = View.VISIBLE
                     lvReceiveImage.hideLoading()
 
                     viewModel.loadDirectOutput(imageRequest)
                 }
+
                 Resource.Status.ERROR -> {
                     ivOutput.visibility = View.GONE
                     lvReceiveImage.showError(updateRequest.message!!)
@@ -124,7 +128,12 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
                 Resource.Status.ERROR -> {
                     ivOutput.visibility = View.GONE
-                    lvReceiveImage.showError(getString(R.string.error_uploading_failed_seg_map, it.message))
+                    lvReceiveImage.showError(
+                        getString(
+                            R.string.error_uploading_failed_seg_map,
+                            it.message
+                        )
+                    )
                 }
             }
         })
@@ -253,7 +262,8 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
     }
 
     private fun showArtStyleDialogFragment() {
-        ArtStylesDialogFragment.newInstance().show(supportFragmentManager, ArtStylesDialogFragment.TAG)
+        ArtStylesDialogFragment.newInstance()
+            .show(supportFragmentManager, ArtStylesDialogFragment.TAG)
     }
 
     override fun onArtStyleSelected(artStyle: Style) {

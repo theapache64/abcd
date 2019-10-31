@@ -17,4 +17,9 @@
         android:title="@string/action_share"
         app:showAsAction="ifRoom" />
 
+    <!--Donate-->
+    <item
+        android:id="@+id/action_donate"
+        android:icon="@drawable/ic_attach_money_white_24dp"
+        android:title="@string/action_donate" />
 </menu>
