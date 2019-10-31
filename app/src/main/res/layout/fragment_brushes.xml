@@ -1,85 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidUnknownAttribute -->
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesViewModel" />
-
-        <variable
-            name="handler"
-            type="com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesHandler" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.fragments.dialogfragments.brushes.BrushesDialogFragment">
-
-        <!--Title-->
-        <TextView
-            android:id="@+id/tv_title"
-            style="@style/dialog_fragment_title_style"
-            fontPath="fonts/GoogleSans-Medium.ttf"
-            android:text="@string/dialog_title_choose_brush"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <!--Category Selector-->
-        <Spinner
-            android:id="@+id/s_categories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_category_selector"
-            app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-        <!--Arrow-->
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:tint="@color/grey_500"
-            app:layout_constraintBottom_toBottomOf="@id/s_categories"
-            app:layout_constraintEnd_toEndOf="@id/s_categories"
-            app:layout_constraintTop_toTopOf="@id/s_categories"
-            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
-
+        tools:context=".ui.fragments.brushes.BrushesFragment">
 
         <!--Brushes-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_brushes"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/b_dismiss"
-            app:layout_constraintEnd_toEndOf="@id/s_categories"
-            app:layout_constraintHeight_default="wrap"
-            app:layout_constraintStart_toStartOf="@id/s_categories"
-            app:layout_constraintTop_toBottomOf="@id/s_categories"
             tools:itemCount="10"
             tools:listitem="@layout/item_brush" />
 
-        <!--Dismiss-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/b_dismiss"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:onClick="@{()-> handler.onDismissClicked()}"
-            android:text="@string/action_dismiss"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/rv_brushes" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

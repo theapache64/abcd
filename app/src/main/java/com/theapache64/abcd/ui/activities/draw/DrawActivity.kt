@@ -17,7 +17,7 @@ import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.ui.activities.styles.StylesActivity
-import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushcategories.BrushCategoriesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.widgets.SpadeCanvas
 import com.theapache64.abcd.utils.BrushUtils
@@ -34,7 +34,7 @@ import javax.inject.Inject
 
 class DrawActivity : BaseAppCompatActivity(),
     DrawHandler,
-    BrushesDialogFragment.Callback,
+    BrushCategoriesDialogFragment.Callback,
     BrushSizeDialogFragment.Callback {
 
 
@@ -222,8 +222,8 @@ class DrawActivity : BaseAppCompatActivity(),
     }
 
     private fun showBrushesFragment() {
-        val brushesFragment = BrushesDialogFragment.newInstance()
-        brushesFragment.show(supportFragmentManager, BrushesDialogFragment.TAG)
+        val brushesFragment = BrushCategoriesDialogFragment.newInstance()
+        brushesFragment.show(supportFragmentManager, BrushCategoriesDialogFragment.TAG)
     }
 
     override fun onBrushSelected(brush: Brush) {

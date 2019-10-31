@@ -1,4 +1,4 @@
-package com.theapache64.abcd.ui.fragments.dialogfragments.brushes
+package com.theapache64.abcd.ui.fragments.dialogfragments.brushcategories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.models.BrushCategory
 import javax.inject.Inject
 
-class BrushesViewModel @Inject constructor(
+class BrushCategoriesViewModel @Inject constructor(
     private val brushesRepo: BrushRepository,
     private val prefRepo: SharedPrefRepository
 ) : ViewModel() {

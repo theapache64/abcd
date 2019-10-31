@@ -2,7 +2,7 @@ package com.theapache64.abcd.di.modules
 
 
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
-import com.theapache64.abcd.ui.fragments.dialogfragments.brushes.BrushesDialogFragment
+import com.theapache64.abcd.ui.fragments.dialogfragments.brushcategories.BrushCategoriesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
 import dagger.Module
@@ -15,7 +15,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentsBuilderModule {
 
     @ContributesAndroidInjector
-    abstract fun getBrushesFragment(): BrushesDialogFragment
+    abstract fun getBrushesFragment(): BrushCategoriesDialogFragment
 
     @ContributesAndroidInjector
     abstract fun getBrushSizeDialogFragment(): BrushSizeDialogFragment

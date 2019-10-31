@@ -9,10 +9,10 @@ import com.theapache64.abcd.models.Brush
 
 class BrushesAdapter(
     context: Context,
+    private val brushes: List<Brush>,
     private val callback: (brush: Brush) -> Unit
 ) : RecyclerView.Adapter<BrushesAdapter.ViewHolder>() {
 
-    var brushes: List<Brush> = listOf()
     private val inflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
