@@ -4,11 +4,11 @@
     tools:context="com.theapache64.abcd.MainActivity">
 
     <!--Art Style -->
-    <item
+    <!--<item
         android:id="@+id/action_art_styles"
         android:icon="@drawable/ic_art_style"
         android:title="@string/action_art_styles"
-        app:showAsAction="always" />
+        app:showAsAction="always" />-->
 
     <!--Share-->
     <item
