@@ -19,7 +19,8 @@
 
     <!--Donate-->
     <item
-        android:id="@+id/action_donate"
+        android:id="@+id/action_mi_donate"
         android:icon="@drawable/ic_attach_money_white_24dp"
-        android:title="@string/action_donate" />
+        android:title="@string/action_support"
+        app:showAsAction="always" />
 </menu>

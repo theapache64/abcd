@@ -20,8 +20,7 @@
 
         <activity
             android:name=".ui.activities.honor.HonorActivity"
-            android:label="@string/action_donate"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.Dialog" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

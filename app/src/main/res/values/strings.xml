@@ -42,5 +42,7 @@
     <string name="dialog_title_maintenance">We\'re sorry</string>
     <string name="action_donate">Donate</string>
     <string name="title_activity_honor">HonorActivity</string>
-    <string name="label_the_honor_system">The Honor System</string>
+    <string name="label_the_honor_system">🙏🏻 \nThe Honor System</string>
+    <string name="label_or">OR</string>
+    <string name="action_support">Support Project</string>
 </resources>

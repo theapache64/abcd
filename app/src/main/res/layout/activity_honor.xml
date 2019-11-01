@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -16,32 +15,98 @@
     </data>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.theapache64.abcd.ui.activities.honor.HonorActivity">
+        android:layout_height="wrap_content"
+        tools:context=".ui.activities.honor.HonorActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+            <!--Logo-->
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_margin="30dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_logo_brush"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+            <!--Title-->
+            <TextView
+                android:id="@+id/tv_title"
+                fontPath="fonts/GoogleSans-Medium.ttf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:text="@string/label_the_honor_system"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="@id/iv_logo"
+                app:layout_constraintStart_toStartOf="@id/iv_logo"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
-        <include
-            android:id="@+id/i_content_honor"
-            layout="@layout/content_honor"
-            bind:handler="@{handler}"
-            bind:viewModel="@{viewModel}" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <!--Content-->
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="@tools:sample/lorem/random" />
+
+            <!--BMAC-->
+            <ImageButton
+                android:id="@+id/ib_buy_me_a_coffee"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{()->handler.onBuyMeACoffeeClicked()}"
+                android:scaleType="centerInside"
+                android:src="@drawable/buy_me_a_coffee"
+                app:layout_constraintEnd_toEndOf="@id/tv_content"
+                app:layout_constraintStart_toStartOf="@id/tv_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_content" />
+
+
+            <!--OR-->
+            <TextView
+                android:id="@+id/tv_or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/label_or"
+                android:textColor="@color/grey_600"
+                app:layout_constraintEnd_toEndOf="@id/ib_buy_me_a_coffee"
+                app:layout_constraintStart_toStartOf="@id/ib_buy_me_a_coffee"
+                app:layout_constraintTop_toBottomOf="@id/ib_buy_me_a_coffee" />
+
+
+            <!--Pay button-->
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:backgroundTint="@color/green_500"
+                android:onClick="@{()->handler.onDonateClicked()}"
+                android:text="@string/action_donate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_or" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </layout>

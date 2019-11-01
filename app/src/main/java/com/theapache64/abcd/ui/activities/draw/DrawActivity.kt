@@ -141,9 +141,19 @@ class DrawActivity : BaseAppCompatActivity(),
 
         })
 
+        // Watching for donation request
+        viewModel.getDonation().observe(this, Observer { isReadyToRequest ->
+            if (isReadyToRequest) {
+                launchHonor()
+            }
+        })
+
         // Setting default canvas properties
         spadeCanvas.paintStrokeWidth = BrushUtils.getDefaultBrushSize()
 
+    }
+
+    private fun launchHonor() {
         startActivity(HonorActivity.getStartIntent(this))
     }
 
@@ -188,6 +198,12 @@ class DrawActivity : BaseAppCompatActivity(),
             // Undo canvas
             R.id.action_undo -> {
                 spadeCanvas.undo()
+                return true
+            }
+
+            // Donate->
+            R.id.action_mi_donate -> {
+                launchHonor()
                 return true
             }
 

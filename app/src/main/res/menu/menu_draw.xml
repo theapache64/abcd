@@ -3,14 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.theapache64.abcd.ui.activities.draw.DrawActivity">
 
-
-    <!--New-->
-    <item
-        android:id="@+id/action_new"
-        android:icon="@drawable/ic_open_in_new_white_24dp"
-        android:title="@string/action_new"
-        app:showAsAction="always" />
-
     <!--Undo -->
     <item
         android:id="@+id/action_undo"
@@ -32,5 +24,18 @@
         android:icon="@drawable/ic_brush_size_white"
         android:title="@string/action_change_brush_size"
         app:showAsAction="always" />
+
+
+    <!--New-->
+    <item
+        android:id="@+id/action_new"
+        android:icon="@drawable/ic_open_in_new_white_24dp"
+        android:title="@string/action_new" />
+
+    <!--Donate-->
+    <item
+        android:id="@+id/action_mi_donate"
+        android:icon="@drawable/ic_attach_money_white_24dp"
+        android:title="@string/action_support" />
 
 </menu>

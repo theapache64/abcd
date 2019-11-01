@@ -8,13 +8,20 @@ import androidx.lifecycle.ViewModel
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.data.repositories.ApiRepository
 import com.theapache64.abcd.data.repositories.BrushRepository
+import com.theapache64.abcd.data.repositories.SharedPrefRepository
 import com.theapache64.abcd.models.Brush
+import com.theapache64.twinkill.utils.livedata.SingleLiveEvent
 import javax.inject.Inject
 
 class DrawViewModel @Inject constructor(
     private val brushesRepository: BrushRepository,
-    private val apiRepository: ApiRepository
+    private val apiRepository: ApiRepository,
+    private val prefRepository: SharedPrefRepository
 ) : ViewModel() {
+
+    companion object {
+        const val DONATION_USAGE_THRESHOLD = 5
+    }
 
     lateinit var mountain: Brush
     lateinit var sky: Brush
@@ -35,4 +42,39 @@ class DrawViewModel @Inject constructor(
 
     private val seaSkyAndMountain = MutableLiveData(brushesRepository.getSeaSkyAndMountain())
     fun getSkySeaAndMountain(): LiveData<Triple<Brush, Brush, Brush>> = seaSkyAndMountain
+
+    private val donation =
+        SingleLiveEvent<Boolean>()
+
+    init {
+        this.donation.value = isEligibleForDonation(
+            prefRepository.getUsageCount(),
+            prefRepository.isInitAskDone(),
+            prefRepository.isThresholdAskDone()
+        )
+    }
+
+    private fun isEligibleForDonation(
+        usageCount: Int,
+        isInitAskDone: Boolean,
+        isThresholdAskDone: Boolean
+    ): Boolean {
+        return if (isInitAskDone && isThresholdAskDone) {
+            false
+        } else {
+            if (usageCount == 0 && !isInitAskDone) {
+                prefRepository.setInitAskDone()
+                return true
+            }
+
+            if (usageCount >= DONATION_USAGE_THRESHOLD && !isThresholdAskDone) {
+                prefRepository.setThresholdAskDone()
+                return true
+            }
+
+            return false
+        }
+    }
+
+    fun getDonation(): LiveData<Boolean> = donation
 }

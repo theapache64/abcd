@@ -18,6 +18,7 @@ import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
+import com.theapache64.abcd.ui.activities.honor.HonorActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
 import com.theapache64.abcd.utils.FileUtils
@@ -158,6 +159,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
                             ivOutput.setImageBitmap(outputBitmap)
 
+
                             // Saving bitmap as file
                             val outputFile = FileUtils.saveBitmap(
                                 this,
@@ -165,6 +167,8 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
                                 outputBitmap
                             )
                             viewModel.outputFile = outputFile
+                            viewModel.incUsageCount()
+
                         } else {
                             viewModel.isErrorOnGen = true
                             ivOutput.visibility = View.GONE
@@ -239,6 +243,11 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
 
             R.id.action_share -> {
                 showShareDialog()
+                return true
+            }
+
+            R.id.action_mi_donate -> {
+                startActivity(HonorActivity.getStartIntent(this))
                 return true
             }
 

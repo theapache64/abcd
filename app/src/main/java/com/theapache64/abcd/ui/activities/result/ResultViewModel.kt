@@ -12,6 +12,7 @@ import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.submitmap.SubmitMapRequest
 import com.theapache64.abcd.data.remote.updaterandom.UpdateRandomRequest
 import com.theapache64.abcd.data.repositories.ApiRepository
+import com.theapache64.abcd.data.repositories.SharedPrefRepository
 import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.models.Style
 import com.theapache64.twinkill.network.utils.Resource
@@ -20,7 +21,8 @@ import java.io.File
 import javax.inject.Inject
 
 class ResultViewModel @Inject constructor(
-    private val apiRepository: ApiRepository
+    private val apiRepository: ApiRepository,
+    private val prefRepository: SharedPrefRepository
 ) : ViewModel() {
 
     var isErrorOnGen: Boolean = false
@@ -95,6 +97,9 @@ class ResultViewModel @Inject constructor(
 
 
     fun getSubmitMapResponse() = submitMapResponse
+    fun incUsageCount() {
+        prefRepository.incUsageCount()
+    }
 
 
 }

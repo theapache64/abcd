@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -17,6 +18,10 @@ import javax.inject.Inject
 class HonorActivity : BaseAppCompatActivity(), HonorHandler {
 
     companion object {
+
+        const val BMAC_URL = "https://www.buymeacoff.ee/theapache64"
+        const val PAYPAL_URL = "https://www.paypal.me/theapache64"
+
         fun getStartIntent(context: Context): Intent {
             return Intent(context, HonorActivity::class.java).apply {
                 // data goes here
@@ -33,7 +38,7 @@ class HonorActivity : BaseAppCompatActivity(), HonorHandler {
     private val data = """
         
          <p>
-             <span>Hi from `abcd` <span> <span>We hope you enjoy using this app!</span>
+             <span>👋 Hi from `abcd` <span> <span>We hope you enjoy using this app!</span>
          </p>
          
          <div>`abcd` is honor-ware, which means that we <b>trust each other</b> to be nice:</div>
@@ -46,13 +51,25 @@ class HonorActivity : BaseAppCompatActivity(), HonorHandler {
          </div>
          
          <p>
-             `abcd` has <b>eight full time employees</b> that depend on your contributions and support.  We're
+             `abcd` uses <b>powerful servers </b> to render your output images. The survival of this app depends on your contributions and support.  We're
              trusting you a <i>lot</i>, but we think it's the decent thing to do.
          </p>
          
          <p>
             <span>Please pay as much as you can, since if you change your mind you have <b>60 days</b> to get a refund!</span>
          </p>
+         
+         <p>
+            <span>You can support me by simply <b>buy me a coffee</b> or If you want to donate something big, you can choose <b>PayPal</b>.</span>
+         </p>
+         
+         <p>
+         
+         
+         Peace
+         -theapache64
+         </p>
+
     """.trimIndent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,26 +77,36 @@ class HonorActivity : BaseAppCompatActivity(), HonorHandler {
         super.onCreate(savedInstanceState)
 
         binding = bindContentView(R.layout.activity_honor)
-        setSupportActionBar(binding.toolbar)
         viewModel = ViewModelProviders.of(this, factory).get(HonorViewModel::class.java)
 
         binding.handler = this
         binding.viewModel = viewModel
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        binding.iContentHonor.tvContent.text = HtmlCompat.fromHtml(
+        binding.tvContent.text = HtmlCompat.fromHtml(
             data,
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
+
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
     override fun onDonateClicked() {
+        browse(PAYPAL_URL)
+    }
 
+
+    override fun onBuyMeACoffeeClicked() {
+        browse(BMAC_URL)
+    }
+
+    private fun browse(url: String) {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse("https://www.paypal.me/theapache64")
+            data = Uri.parse(url)
         }
 
         startActivity(intent)
+        finish()
     }
+
+
 }
