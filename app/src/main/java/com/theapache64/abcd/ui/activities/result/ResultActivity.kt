@@ -19,6 +19,7 @@ import com.theapache64.abcd.data.repositories.StyleRepository
 import com.theapache64.abcd.databinding.ActivityResultBinding
 import com.theapache64.abcd.models.Style
 import com.theapache64.abcd.ui.activities.honor.HonorActivity
+import com.theapache64.abcd.ui.activities.honor.LaunchType
 import com.theapache64.abcd.ui.fragments.dialogfragments.artstyles.ArtStylesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.share.ShareDialogFragment
 import com.theapache64.abcd.utils.FileUtils
@@ -247,7 +248,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
             }
 
             R.id.action_mi_donate -> {
-                startActivity(HonorActivity.getStartIntent(this))
+                startActivity(HonorActivity.getStartIntent(this, LaunchType.MANUAL))
                 return true
             }
 

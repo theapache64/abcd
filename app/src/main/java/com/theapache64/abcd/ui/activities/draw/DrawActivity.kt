@@ -17,6 +17,7 @@ import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
 import com.theapache64.abcd.ui.activities.honor.HonorActivity
+import com.theapache64.abcd.ui.activities.honor.LaunchType
 import com.theapache64.abcd.ui.activities.styles.StylesActivity
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushcategories.BrushCategoriesDialogFragment
 import com.theapache64.abcd.ui.fragments.dialogfragments.brushsize.BrushSizeDialogFragment
@@ -142,19 +143,18 @@ class DrawActivity : BaseAppCompatActivity(),
         })
 
         // Watching for donation request
-        viewModel.getDonation().observe(this, Observer { isReadyToRequest ->
-            if (isReadyToRequest) {
-                launchHonor()
+        viewModel.getDonation().observe(this, Observer { launchType ->
+            if (launchType != null) {
+                launchHonor(launchType)
             }
         })
 
         // Setting default canvas properties
         spadeCanvas.paintStrokeWidth = BrushUtils.getDefaultBrushSize()
-
     }
 
-    private fun launchHonor() {
-        startActivity(HonorActivity.getStartIntent(this))
+    private fun launchHonor(launchType: LaunchType) {
+        startActivity(HonorActivity.getStartIntent(this, launchType))
     }
 
 
@@ -203,7 +203,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
             // Donate->
             R.id.action_mi_donate -> {
-                launchHonor()
+                launchHonor(LaunchType.MANUAL)
                 return true
             }
 

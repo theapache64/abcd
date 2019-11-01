@@ -10,6 +10,7 @@ import com.theapache64.abcd.data.repositories.ApiRepository
 import com.theapache64.abcd.data.repositories.BrushRepository
 import com.theapache64.abcd.data.repositories.SharedPrefRepository
 import com.theapache64.abcd.models.Brush
+import com.theapache64.abcd.ui.activities.honor.LaunchType
 import com.theapache64.twinkill.utils.livedata.SingleLiveEvent
 import javax.inject.Inject
 
@@ -44,37 +45,37 @@ class DrawViewModel @Inject constructor(
     fun getSkySeaAndMountain(): LiveData<Triple<Brush, Brush, Brush>> = seaSkyAndMountain
 
     private val donation =
-        SingleLiveEvent<Boolean>()
+        SingleLiveEvent<LaunchType>()
 
     init {
-        this.donation.value = isEligibleForDonation(
+        this.donation.value = getLaunchType(
             prefRepository.getUsageCount(),
             prefRepository.isInitAskDone(),
             prefRepository.isThresholdAskDone()
         )
     }
 
-    private fun isEligibleForDonation(
+    private fun getLaunchType(
         usageCount: Int,
         isInitAskDone: Boolean,
         isThresholdAskDone: Boolean
-    ): Boolean {
+    ): LaunchType? {
         return if (isInitAskDone && isThresholdAskDone) {
-            false
+            null
         } else {
             if (usageCount == 0 && !isInitAskDone) {
                 prefRepository.setInitAskDone()
-                return true
+                return LaunchType.FIRST
             }
 
             if (usageCount >= DONATION_USAGE_THRESHOLD && !isThresholdAskDone) {
                 prefRepository.setThresholdAskDone()
-                return true
+                return LaunchType.THRESHOLD
             }
 
-            return false
+            return null
         }
     }
 
-    fun getDonation(): LiveData<Boolean> = donation
+    fun getDonation(): LiveData<LaunchType> = donation
 }
