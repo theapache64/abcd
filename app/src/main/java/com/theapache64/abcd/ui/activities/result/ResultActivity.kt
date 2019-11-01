@@ -237,10 +237,10 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
 
-            R.id.action_art_styles -> {
+            /*R.id.action_art_styles -> {
                 showArtStyleDialogFragment()
                 return true
-            }
+            }*/
 
             R.id.action_share -> {
                 showShareDialog()
