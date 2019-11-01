@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivityDrawBinding
 import com.theapache64.abcd.models.Brush
@@ -53,6 +54,7 @@ class DrawActivity : BaseAppCompatActivity(),
 
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     private lateinit var viewModel: DrawViewModel
     private lateinit var spadeCanvas: SpadeCanvas
@@ -60,6 +62,7 @@ class DrawActivity : BaseAppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         val binding = bindContentView<ActivityDrawBinding>(R.layout.activity_draw)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -246,6 +249,12 @@ class DrawActivity : BaseAppCompatActivity(),
     override fun onBrushSelected(brush: Brush) {
         supportActionBar!!.subtitle = "Brush : ${brush.name}"
         spadeCanvas.paintStrokeColor = Color.parseColor(brush.color)
+
+        // Brush selected
+        val bundle = Bundle().apply {
+            putSerializable("brush_name", brush.name)
+        }
+        firebaseAnalytics.logEvent("brush_selected", bundle)
     }
 
     override fun onBrushSizeChanged(brushSize: Float) {

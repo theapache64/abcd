@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.theapache64.abcd.BuildConfig
 import com.theapache64.abcd.R
 import com.theapache64.abcd.databinding.ActivitySplashBinding
@@ -101,6 +102,13 @@ class SplashActivity : BaseAppCompatActivity() {
             viewModel.loadPublicPrefs()
         }, SPLASH_DURATION)
 
+
+        logOpen()
+
+    }
+
+    private fun logOpen() {
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
     }
 
     private fun showDownDialog(downReason: String) {
