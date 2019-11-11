@@ -296,7 +296,7 @@ class ResultActivity : BaseAppCompatActivity(), ArtStylesDialogFragment.Callback
         intent.putExtra(Intent.EXTRA_STREAM, photoURI)
         intent.putExtra(
             Intent.EXTRA_TEXT,
-            "Hey, look what I created using abcd.\n\nTry and send me back yours\nhttps://github.com/theapache64/abcd/releases"
+            "Hey, look what I created using `abcd`. \n\nDownload it from https://play.google.com/store/apps/details?id=com.theapache64.abcd"
         )
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.type = "image/png"

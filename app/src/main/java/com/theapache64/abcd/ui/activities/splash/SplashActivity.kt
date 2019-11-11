@@ -133,16 +133,16 @@ class SplashActivity : BaseAppCompatActivity() {
             }
             .setPositiveButton(R.string.action_update) { _, _ ->
                 // go to release page
-                goToReleasePage()
+                goToPlayStore()
                 finish()
             }
             .create()
             .show()
     }
 
-    private fun goToReleasePage() {
+    private fun goToPlayStore() {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://github.com/theapache64/abcd/releases")
+        intent.data = Uri.parse("https://play.google.com/store/apps/details?id=com.theapache64.abcd")
         startActivity(intent)
     }
 
