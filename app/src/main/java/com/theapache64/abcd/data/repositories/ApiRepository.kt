@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.jaredrummler.android.device.DeviceName
 import com.squareup.moshi.Moshi
+import com.theapache64.abcd.App
 import com.theapache64.abcd.data.remote.ApiInterface
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageRequest
 import com.theapache64.abcd.data.remote.receiveimage.ReceiveImageResponse
@@ -47,7 +48,7 @@ class ApiRepository @Inject constructor(
             .build()
 
         // Building server url
-        val url = "http://theapache64.com/abcd/receive_image"
+        val url = "${App.BASE_URL}/receive_image"
 
         // Building request
         val imageRequest = Request.Builder()

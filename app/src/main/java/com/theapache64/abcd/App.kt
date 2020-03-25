@@ -20,6 +20,10 @@ import javax.inject.Inject
 class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInjector {
 
 
+    companion object {
+        const val BASE_URL = "https://theapache64.com/abcd"
+    }
+
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
@@ -36,7 +40,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
         DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
             .appModule(AppModule(this))
-            .baseNetworkModule(BaseNetworkModule("https://theapache64.com/abcd/"))
+            .baseNetworkModule(BaseNetworkModule("$BASE_URL/"))
             .build()
             .inject(this)
 
