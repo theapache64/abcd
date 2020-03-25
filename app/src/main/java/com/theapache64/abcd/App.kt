@@ -36,7 +36,7 @@ class App : MultiDexApplication(), HasActivityInjector, HasSupportFragmentInject
         DaggerAppComponent.builder()
             .contextModule(ContextModule(this))
             .appModule(AppModule(this))
-            .baseNetworkModule(BaseNetworkModule("http://theapache64.com/abcd/"))
+            .baseNetworkModule(BaseNetworkModule("https://theapache64.com/abcd/"))
             .build()
             .inject(this)
 

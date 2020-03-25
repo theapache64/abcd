@@ -20,6 +20,7 @@ import com.theapache64.twinkill.logger.info
 import com.theapache64.twinkill.network.utils.Resource
 import com.theapache64.twinkill.ui.activities.base.BaseAppCompatActivity
 import com.theapache64.twinkill.utils.extensions.bindContentView
+import com.theapache64.twinkill.utils.extensions.toast
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -142,7 +143,8 @@ class SplashActivity : BaseAppCompatActivity() {
 
     private fun goToPlayStore() {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("https://play.google.com/store/apps/details?id=com.theapache64.abcd")
+        intent.data =
+            Uri.parse("https://play.google.com/store/apps/details?id=com.theapache64.abcd")
         startActivity(intent)
     }
 
